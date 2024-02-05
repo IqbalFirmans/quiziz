@@ -175,7 +175,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                        <img src="{{ asset('admin/assets/img/small-logos/logo-xd.svg') }}" class="avatar avatar-sm me-3" alt="xd">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Material XD Version</h6>
@@ -185,16 +185,16 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img src="../assets/img/team-1.jpg" alt="team1">
+                        <img src="{{ asset('admin/assets/img/team-1.jpg') }}" alt="team1">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img src="../assets/img/team-2.jpg" alt="team2">
+                        <img src="{{ asset('admin/assets/img/team-2.jpg') }}" alt="team2">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                        <img src="../assets/img/team-3.jpg" alt="team3">
+                        <img src="{{ asset('admin/assets/img/team-3.jpg') }}" alt="team3">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img src="../assets/img/team-4.jpg" alt="team4">
+                        <img src="{{ asset('admin/assets/img/team-3.jpg') }}" alt="team4">
                       </a>
                     </div>
                   </td>
@@ -218,7 +218,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian">
+                        <img src="{{ asset('admin/assets/img/small-logos/logo-atlassian.svg') }}" class="avatar avatar-sm me-3" alt="atlassian">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Add Progress Track</h6>
@@ -228,10 +228,10 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img src="../assets/img/team-2.jpg" alt="team5">
+                        <img src="{{ asset('admin/assets/img/team-2.jpg') }}" alt="team5">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img src="../assets/img/team-4.jpg" alt="team6">
+                        <img src="{{ asset('admin/assets/img/team-2.jpg') }}" alt="team6">
                       </a>
                     </div>
                   </td>
@@ -255,7 +255,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7">
+                        <img src="{{ asset('admin/assets/img/small-logos/logo-slack.svg') }}" class="avatar avatar-sm me-3" alt="team7">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
@@ -265,10 +265,10 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img src="../assets/img/team-3.jpg" alt="team8">
+                        <img src="{{ asset('admin/assets/img/team-3.jpg') }}" alt="team8">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img src="../assets/img/team-1.jpg" alt="team9">
+                        <img src="{{ asset('admin/assets/img/team-3.jpg') }}" alt="team9">
                       </a>
                     </div>
                   </td>
@@ -292,7 +292,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify">
+                        <img src="{{ asset('admin/assets/img/small-logos/logo-spotify.svg') }}" class="avatar avatar-sm me-3" alt="spotify">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
@@ -302,16 +302,16 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img src="../assets/img/team-4.jpg" alt="user1">
+                        <img src="{{ asset('admin/assets/img/team-4.jpg') }}" alt="user1">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img src="../assets/img/team-3.jpg" alt="user2">
+                        <img src="{{ asset('admin/assets/img/team-4.jpg') }}" alt="user2">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                        <img src="../assets/img/team-4.jpg" alt="user3">
+                        <img src="{{ asset('admin/assets/img/team-4.jpg') }}" alt="user3">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img src="../assets/img/team-1.jpg" alt="user4">
+                        <img src="{{ asset('admin/assets/img/team-4.jpg') }}" alt="user4">
                       </a>
                     </div>
                   </td>
@@ -335,7 +335,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira">
+                        <img src="{{ asset('admin/assets/img/small-logos/logo-jira.svg') }}" class="avatar avatar-sm me-3" alt="jira">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
@@ -345,7 +345,7 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img src="../assets/img/team-4.jpg" alt="user5">
+                        <img src="{{ asset('admin/assets/img/team-4.jpg') }}" alt="user5">
                       </a>
                     </div>
                   </td>
@@ -369,7 +369,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm me-3" alt="invision">
+                        <img src="{{ asset('admin/assets/img/small-logos/logo-invision.svg') }}" class="avatar avatar-sm me-3" alt="invision">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
@@ -379,10 +379,10 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img src="../assets/img/team-1.jpg" alt="user6">
+                        <img src="{{ asset('admin/assets/img/team-1.jpg') }}" alt="user6">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img src="../assets/img/team-4.jpg" alt="user7">
+                        <img src="{{ asset('admin/assets/img/team-1.jpg') }}" alt="user7">
                       </a>
                     </div>
                   </td>

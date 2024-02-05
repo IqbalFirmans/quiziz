@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/tables', [DashboardController::class, 'tables'])->name('dashboard.tables');
+
+
+Route::get('/login', function(){
+    return view('auth.login');
+});
+Route::get('/register', function(){
+    return view('auth.register');
 });
