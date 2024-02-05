@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/tables', [DashboardController::class, 'tables'])->name('dashboard.tables');
-
-
-Route::get('/login', function(){
-    return view('auth.login');
+Route::prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/tables', [DashboardController::class, 'tables'])->name('dashboard.tables');
 });
-Route::get('/register', function(){
-    return view('auth.register');
+
+
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+    Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 });
