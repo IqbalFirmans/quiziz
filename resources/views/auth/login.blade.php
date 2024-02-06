@@ -49,7 +49,7 @@
                                 </div>
                                 <p class="mt-4 text-sm text-center">
                                     Don't have an account?
-                                    <a href="/register" class="text-primary text-gradient font-weight-bold">Sign
+                                    <a href="/auth/register" class="text-primary text-gradient font-weight-bold">Sign
                                         up</a>
                                 </p>
                             </form>

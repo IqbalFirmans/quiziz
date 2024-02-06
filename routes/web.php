@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect('/user/home');
+});
+
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/tables', [DashboardController::class, 'tables'])->name('dashboard.tables');
@@ -30,5 +34,13 @@ Route::prefix('auth')->group(function () {
 Route::prefix('user')->group(function () {
     Route::get('/home', function () {
         return view('user.home');
+    });
+    Route::get('/share', function () {
+        return view('user.share');
+    });
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', function () {
+            return view('user.profile');
+        });
     });
 });
