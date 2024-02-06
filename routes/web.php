@@ -26,3 +26,9 @@ Route::prefix('auth')->group(function () {
     Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 });
+
+Route::prefix('user')->group(function () {
+    Route::get('/home', function () {
+        return view('user.home');
+    });
+});
