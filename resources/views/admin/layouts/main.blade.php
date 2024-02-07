@@ -22,6 +22,8 @@
     <!-- CSS Files -->
 
     <link id="pagestyle" href="{{ asset('admin/assets/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+    <!-- Link Izitoast Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -43,7 +45,8 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white  {{ $title == 'Dashboard' ? 'bg-gradient-primary active' : '' }}" href="/">
+                    <a class="nav-link text-white  {{ $title == 'Dashboard' ? 'bg-gradient-primary active' : '' }}"
+                        href="/">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -51,7 +54,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ $title == 'Tables' ? 'bg-gradient-primary active' : '' }}" href="/tables">
+                    <a class="nav-link text-white {{ $title == 'Tables' ? 'bg-gradient-primary active' : '' }}"
+                        href="/tables">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -70,7 +74,8 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $title }}</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $title }}
+                        </li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">{{ $title }}</h6>
                 </nav>
@@ -492,6 +497,23 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('admin/assets/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script>
+        @if (session('success'))
+            iziToast.success({
+                title: 'Sukses!',
+                message: {{ session('success') }},
+                position: 'topRight'
+            });
+        @endif
+        @if ($errors->any())
+            iziToast.error({
+                title: 'Erorr!',
+                message: {{ $errors->first() }},
+                position: 'topRight'
+            });
+        @endif
+    </script>
 </body>
 
 </html>

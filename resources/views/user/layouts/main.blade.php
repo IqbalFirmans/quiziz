@@ -4,10 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quiziz</title>
+    <link rel="icon" type="image/png" href="{{ asset('admin/assets/img/favicon.png') }}">
+    <title>Quiziz | @yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Link Izitoast Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     <style>
         :root {
             --bs-blue: #63B3ED;
@@ -150,6 +153,13 @@
                             aria-current="true">
                             <i class="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
                         </a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="list-group-item bg-light list-group-item-action my-1 py-2 ripple"
+                                aria-current="true">
+                                <i class="fa-solid fa-right-to-bracket fa-fw me-3"></i><span>Logout</span>
+                            </button>
+                        </form>
                     @else
                         <a href="/auth/login" class="list-group-item bg-light list-group-item-action my-1 py-2 ripple"
                             aria-current="true">
@@ -178,35 +188,12 @@
                 </button>
 
                 <!-- Brand -->
-                <a class="navbar-brand" href="#">
-                    <h3>Quiziz</h3>
+                <a class="navbar-brand d-flex gap-2" href="#">
+                    <img src="{{ asset('admin/assets/img/favicon.png') }}" width="30" height="30" alt="">
+                    <h3 class="text-dark">Quiziz</h3>
                 </a>
                 <!-- Search form -->
 
-                <!-- Right links -->
-                <ul class="navbar-nav ms-auto d-flex gap-2 flex-row">
-                    <!-- Notification dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link me-3 me-lg-0 hidden-arrow" href="#" style="position: relative;"
-                            data-bs-target="#navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="fas fa-bell fa-xl"></i>
-                            <span class="badge rounded-pill badge-notification bg-danger"
-                                style="position: absolute;top: 2px;right: -7%;">1</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" id="navbarDropdownMenuLink">
-                            <li>
-                                <a class="dropdown-item" href="#">Some news</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Another news</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <!-- Container wrapper -->
         </nav>
@@ -222,6 +209,23 @@
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script>
+        @if (session('success'))
+            iziToast.success({
+                title: 'Sukses!',
+                message: {{ session('success') }},
+                position: 'topRight'
+            });
+        @endif
+        @if ($errors->any())
+            iziToast.error({
+                title: 'Erorr!',
+                message: {{ $errors->first() }},
+                position: 'topRight'
+            });
+        @endif
     </script>
 </body>
 

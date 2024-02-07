@@ -1,5 +1,5 @@
 @extends('auth.layouts.main')
-
+@section('title', 'Register')
 @section('content')
     <div class="page-header min-vh-100">
         <div class="container">
@@ -19,18 +19,16 @@
                             <p class="mb-0">Enter your email and password to register</p>
                         </div>
                         <div class="card-body">
-                            <form role="form">
+                            <form role="form" action="{{ route('auth.register') }}" method="POST">
+                                @csrf
                                 <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" name="name" placeholder="Name" class="form-control border border-lg p-2">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control">
+                                    <input type="email" name="email" class="form-control border border-lg p-2" placeholder="Email">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control">
+                                    <input type="password" name="password" class="form-control border border-lg p-2" placeholder="Password">
                                 </div>
                                 <div class="form-check form-check-info text-start ps-0">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
@@ -41,7 +39,7 @@
                                     </label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button"
+                                    <button type="submit"
                                         class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
                                 </div>
                             </form>
