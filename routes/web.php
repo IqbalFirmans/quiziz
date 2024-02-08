@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,26 +33,26 @@ Route::middleware(['role:admin'])->group(function () {
 // route untuk authentikasi login register
 Route::middleware(['guest'])->group(function () {
     Route::prefix('auth')->group(function () {
-        Route::get('/login', [AuthController::class, 'login'])->name('login');
-        Route::get('/register', [AuthController::class, 'register'])->name('register');
-        Route::post('/register', [AuthController::class, 'store'])->name('auth.register');
-        Route::post('/login', [AuthController::class, 'process_login'])->name('auth.login');
+        Route::get('/login', [LoginController::class, 'login'])->name('login');
+        Route::get('/register', [RegisterController::class, 'register'])->name('register');
+        Route::post('/register', [RegisterController::class, 'store'])->name('auth.register');
+        Route::post('/login', [LoginController::class, 'process_login'])->name('auth.login');
 
         // register dengan akun github
-        Route::get('/github/redirect', [AuthController::class, 'redirect_socialite_github']);
+        Route::get('/github/redirect', [SocialiteController::class, 'redirect_socialite_github']);
 
-        Route::get('/github/callback', [AuthController::class, 'callback_socialite_github']);
+        Route::get('/github/callback', [SocialiteController::class, 'callback_socialite_github']);
 
         // forgot-password route
-        Route::get('/forgot-password', [AuthController::class, 'request_reset'])->name('password.request');
-        Route::post('/forgot-password', [AuthController::class, 'send_reset_link'])->name('password.email');
-        Route::get('/reset-password/{token}', [AuthController::class, 'reset_password'])->name('password.reset');
-        Route::post('/reset-password', [AuthController::class, 'update_password'])->name('password.update');
+        Route::get('/forgot-password', [ResetPasswordController::class, 'request_reset'])->name('password.request');
+        Route::post('/forgot-password', [ResetPasswordController::class, 'send_reset_link'])->name('password.email');
+        Route::get('/reset-password/{token}', [ResetPasswordController::class, 'reset_password'])->name('password.reset');
+        Route::post('/reset-password', [ResetPasswordController::class, 'update_password'])->name('password.update');
     });
 });
 
 // route untuk button dari email verifikasi
-Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verify_email'])->middleware(['auth', 'signed'])->name('verification.verify');
 
 // route untuk memberi tahu user untuk cek email setelah registrasi
 Route::get('/email/verify', function () {
@@ -69,6 +72,6 @@ Route::prefix('user')->group(function () {
         Route::get('/profile', function () {
             return view('user.profile');
         })->name('profile');
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     });
 });
