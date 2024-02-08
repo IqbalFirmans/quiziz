@@ -7,6 +7,7 @@ use App\Repositories\Auth\RegisterRepository;
 use App\Services\LoginService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,15 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         $this->register->register($request->all());
-        return redirect()->route('login')->with('success', 'Sukses register, silakan login terlebih dahulu.');
+        $this->register->SendEmailVerification();
+        $this->register->Login();
+        return redirect()->route('verification.notice');
+    }
+    public function verify_email(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+        $this->register->VerifyEmail($request);
+        return redirect('/user/profile');
     }
     public function process_login(Request $request)
     {

@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 interface RegisterInterface{
     public function register(Request $request);
-    public function SendEmailVerification(User $user);
-    public function Verification($token);
+    public function SendEmailVerification();
+    public function Login();
+    public function VerifyEmail($request);
 }
 
 

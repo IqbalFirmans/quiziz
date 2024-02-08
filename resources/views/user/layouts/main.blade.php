@@ -147,12 +147,25 @@
                         aria-current="true">
                         <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
                     </a>
+                    <a href="/user/share"
+                        class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('user/share') ? 'bg-primary rounded text-white' : 'bg-light' }}"
+                        aria-current="true">
+                        <i class="fa-solid fa-share fa-fw me-3"></i><span>Share</span>
+                    </a>
                     @auth
-                        <a href="/user/profile"
-                            class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('user/profile') ? 'bg-primary rounded text-white' : 'bg-light' }}"
-                            aria-current="true">
-                            <i class="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
-                        </a>
+                        @if (Auth::user()->role == 'admin')
+                            <a href="/admin/dashboard"
+                                class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('admin/dashboard') ? 'bg-primary rounded text-white' : 'bg-light' }}"
+                                aria-current="true">
+                                <i class="fa-solid fa-user-tie fa-fw me-3"></i><span>Dashboard Admin</span>
+                            </a>
+                        @else
+                            <a href="/user/profile"
+                                class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('user/profile') ? 'bg-primary rounded text-white' : 'bg-light' }}"
+                                aria-current="true">
+                                <i class="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
+                            </a>
+                        @endif
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
                             <button type="submit" class="list-group-item bg-light list-group-item-action my-1 py-2 ripple"
@@ -166,11 +179,6 @@
                             <i class="fa-solid fa-right-to-bracket fa-fw me-3"></i><span>Login</span>
                         </a>
                     @endauth
-                    <a href="/user/share"
-                        class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('user/share') ? 'bg-primary rounded text-white' : 'bg-light' }}"
-                        aria-current="true">
-                        <i class="fa-solid fa-share fa-fw me-3"></i><span>Share</span>
-                    </a>
                 </div>
             </div>
         </nav>

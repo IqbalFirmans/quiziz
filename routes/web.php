@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::get('/', function () {
 // route untuk bagian admin
 Route::middleware(['role:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::get('/tables', [DashboardController::class, 'tables'])->name('dashboard.tables');
     });
 });
@@ -37,6 +38,14 @@ Route::middleware(['guest'])->group(function () {
     });
 });
 
+// route untuk button dari email verifikasi
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify_email'])->middleware(['auth', 'signed'])->name('verification.verify');
+
+// route untuk memberi tahu user untuk cek email setelah registrasi
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
 // route untuk user
 Route::prefix('user')->group(function () {
     Route::get('/home', function () {
@@ -46,7 +55,7 @@ Route::prefix('user')->group(function () {
         return view('user.share');
     })->name('share');
     // route untuk user yang sudah login
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/profile', function () {
             return view('user.profile');
         })->name('profile');

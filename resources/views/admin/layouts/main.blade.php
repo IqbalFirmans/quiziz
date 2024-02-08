@@ -46,7 +46,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link text-white  {{ $title == 'Dashboard' ? 'bg-gradient-primary active' : '' }}"
-                        href="/">
+                        href="/admin/dashboard">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -55,7 +55,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ $title == 'Tables' ? 'bg-gradient-primary active' : '' }}"
-                        href="/tables">
+                        href="/admin/tables">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
