@@ -15,7 +15,7 @@ class RegisterRepository
     public function register($request)
     {
         $rules = [
-            'name' => 'required|max:25',
+            'name' => 'required|max:25|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8'
         ];

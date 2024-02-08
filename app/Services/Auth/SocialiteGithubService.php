@@ -2,25 +2,26 @@
 
 namespace App\Services\Auth;
 
-use App\Contracts\Auth\SocialiteInterface;
+use App\Contracts\Auth\Socialite\GithubInterface;
 use Laravel\Socialite\Facades\Socialite;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class SocialiteService implements SocialiteInterface
+class SocialiteGithubService implements GithubInterface
 {
     public function __construct()
     {
         //
     }
-    public function redirect($with)
+    public function redirect_github()
     {
-        return Socialite::driver($with)->redirect();
+        return Socialite::driver("github")->redirect();
     }
-    public function callback($with)
+    public function callback_github()
     {
-        $githubUser = Socialite::driver('github')->user();
+        $githubUser = Socialite::driver("github")->user();
+
 
         $user = User::updateOrCreate([
             'github_id' => $githubUser->id,

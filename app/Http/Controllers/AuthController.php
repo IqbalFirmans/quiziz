@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Auth\LoginService;
 use App\Services\Auth\RegisterService;
-use App\Services\Auth\SocialiteService;
+use App\Services\Auth\SocialiteGithubService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 class AuthController extends Controller
 {
     public $login, $register, $socialite;
-    public function __construct(LoginService $login, RegisterService $register, SocialiteService $socialite)
+    public function __construct(LoginService $login, RegisterService $register, SocialiteGithubService $socialite)
     {
         $this->login = $login;
         $this->register = $register;
@@ -52,12 +52,12 @@ class AuthController extends Controller
     }
     public function redirect_socialite_github()
     {
-        return $this->socialite->redirect("github");
+        return $this->socialite->redirect_github();
     }
     public function callback_socialite_github()
     {
-        $this->socialite->callback("github");
-        return redirect('/user/home');
+        $this->socialite->callback_github();
+        return redirect('/user/home')->with('success', 'Sukses masuk dengan akun github.');
     }
     public function logout()
     {
