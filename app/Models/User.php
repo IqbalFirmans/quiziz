@@ -21,7 +21,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'github_id',
+        'github_token',
+        'github_refresh_token'
     ];
 
     /**
@@ -32,6 +35,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'github_id',
+        'github_token',
+        'github_refresh_token'
     ];
 
     /**

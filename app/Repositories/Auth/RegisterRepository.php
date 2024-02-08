@@ -2,14 +2,10 @@
 
 namespace App\Repositories\Auth;
 
-use App\Contracts\Auth\RegisterInterface;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Validators\ValidasiValidator;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
 
-class RegisterRepository implements RegisterInterface
+class RegisterRepository
 {
     public $validasi, $user;
     public function __construct(ValidasiValidator $validasi)
@@ -26,17 +22,5 @@ class RegisterRepository implements RegisterInterface
         $this->validasi->validate($request, $rules);
         $this->user = User::create($request);
         return $this->user;
-    }
-    public function SendEmailVerification()
-    {
-        event(new Registered($this->user));
-    }
-    public function Login()
-    {
-        return Auth::login($this->user);
-    }
-    public function VerifyEmail($request)
-    {
-        return $request->fulfill();
     }
 }

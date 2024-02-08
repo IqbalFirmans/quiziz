@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +34,11 @@ Route::middleware(['guest'])->group(function () {
         Route::get('/register', [AuthController::class, 'register'])->name('register');
         Route::post('/register', [AuthController::class, 'store'])->name('auth.register');
         Route::post('/login', [AuthController::class, 'process_login'])->name('auth.login');
+
+        // register dengan akun github
+        Route::get('/github/redirect', [AuthController::class, 'redirect_socialite_github']);
+
+        Route::get('/github/callback', [AuthController::class, 'callback_socialite_github']);
     });
 });
 

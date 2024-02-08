@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Repositories\Auth\RegisterRepository;
-use App\Services\LoginService;
+use App\Services\Auth\LoginService;
+use App\Services\Auth\RegisterService;
+use App\Services\Auth\SocialiteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
-    public $login, $register;
-    public function __construct(LoginService $login, RegisterRepository $register)
+    public $login, $register, $socialite;
+    public function __construct(LoginService $login, RegisterService $register, SocialiteService $socialite)
     {
         $this->login = $login;
         $this->register = $register;
+        $this->socialite = $socialite;
     }
     public function login()
     {
@@ -48,6 +49,15 @@ class AuthController extends Controller
             return redirect()->back()->withErrors('Gagal Login.');
         }
         return redirect()->route('home')->with('success', 'Sukses login, selamat datang di web ini.');
+    }
+    public function redirect_socialite_github()
+    {
+        return $this->socialite->redirect("github");
+    }
+    public function callback_socialite_github()
+    {
+        $this->socialite->callback("github");
+        return redirect('/user/home');
     }
     public function logout()
     {

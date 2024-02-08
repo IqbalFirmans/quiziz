@@ -18,17 +18,24 @@
                             <h4 class="font-weight-bolder">Sign Up</h4>
                             <p class="mb-0">Enter your email and password to register</p>
                         </div>
+                        <a class="btn btn-link px-3" href="/auth/github/redirect">
+                            <i class="fa fa-github text-primary text-lg"></i> <br>
+                            With Github
+                        </a>
                         <div class="card-body">
                             <form role="form" action="{{ route('auth.register') }}" method="POST">
                                 @csrf
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" name="name" placeholder="Name" class="form-control border border-lg p-2">
+                                    <input type="text" name="name" placeholder="Name"
+                                        class="form-control border border-lg p-2">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="email" name="email" class="form-control border border-lg p-2" placeholder="Email">
+                                    <input type="email" name="email" class="form-control border border-lg p-2"
+                                        placeholder="Email">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="password" name="password" class="form-control border border-lg p-2" placeholder="Password">
+                                    <input type="password" name="password" class="form-control border border-lg p-2"
+                                        placeholder="Password">
                                 </div>
                                 <div class="form-check form-check-info text-start ps-0">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"

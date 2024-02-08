@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Auth;
 
 use App\Contracts\Auth\LoginInterface;
 use App\Validators\ValidasiValidator;
