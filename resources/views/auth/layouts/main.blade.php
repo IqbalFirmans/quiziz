@@ -61,6 +61,13 @@
                 position: 'topRight'
             });
         @endif
+        @if (session('status'))
+            iziToast.success({
+                title: 'Sukses!',
+                message: "{{ session('status') }}",
+                position: 'topRight'
+            });
+        @endif
         @if ($errors->any())
             iziToast.error({
                 title: 'Erorr!',

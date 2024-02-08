@@ -39,6 +39,12 @@ Route::middleware(['guest'])->group(function () {
         Route::get('/github/redirect', [AuthController::class, 'redirect_socialite_github']);
 
         Route::get('/github/callback', [AuthController::class, 'callback_socialite_github']);
+
+        // forgot-password route
+        Route::get('/forgot-password', [AuthController::class, 'request_reset'])->name('password.request');
+        Route::post('/forgot-password', [AuthController::class, 'send_reset_link'])->name('password.email');
+        Route::get('/reset-password/{token}', [AuthController::class, 'reset_password'])->name('password.reset');
+        Route::post('/reset-password', [AuthController::class, 'update_password'])->name('password.update');
     });
 });
 
