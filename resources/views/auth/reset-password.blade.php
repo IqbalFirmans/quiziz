@@ -19,7 +19,7 @@
                                     <input type="password" name="password" class="form-control border border-lg p-2" placeholder="Password">
                                 </div>
                                 <div class="input-group input-group-outline mb-3 mt-0">
-                                    <input type="password_confirmation" name="password_confirmation" class="form-control border border-lg p-2"
+                                    <input type="password" name="password_confirmation" class="form-control border border-lg p-2"
                                         placeholder="Password Confirmation">
                                 </div>
                                 <div class="text-center">
