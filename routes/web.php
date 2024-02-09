@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::middleware(['role:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-        Route::get('/tables', [DashboardController::class, 'tables'])->name('dashboard.tables');
+        Route::get('/laporan', [DashboardController::class, 'laporan'])->name('dashboard.laporan');
     });
 });
 

@@ -13,9 +13,9 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('title'));
     }
 
-    public function tables()
+    public function laporan()
     {
-        $title = 'Tables';
+        $title = 'Laporan';
         return view('admin.tables', compact('title'));
     }
 }
