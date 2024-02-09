@@ -75,6 +75,25 @@
                 position: 'topRight'
             });
         @endif
+    
+        function eye()
+        {
+            let eye = document.getElementById("eye");
+            eye.style.display = "none";
+            let eye_slash = document.getElementById("eye_slash");
+            eye_slash.style.display = "block";
+            let password = document.getElementById("password");
+            password.type = "password";
+        }
+        function eye_slash()
+        {
+            let eye = document.getElementById("eye");
+            eye.style.display = "block";
+            let eye_slash = document.getElementById("eye_slash");
+            eye_slash.style.display = "none";
+            let password = document.getElementById("password");
+            password.type = "text";
+        }
     </script>
 </body>
 
