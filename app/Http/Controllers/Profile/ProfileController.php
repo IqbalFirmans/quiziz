@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -43,7 +44,7 @@ class ProfileController extends Controller
         // mengedit data name dan biodata dengan request
         $user->name = $request->name;
         $user->biodata = $request->biodata;
-        
+
 
         // untuk menyimpan perubahan
         $user->save();

@@ -225,14 +225,14 @@
         @if (session('success'))
             iziToast.success({
                 title: 'Sukses!',
-                message: {{ session('success') }},
+                message: "{{ session('success') }}",
                 position: 'topRight'
             });
         @endif
         @if ($errors->any())
             iziToast.error({
                 title: 'Erorr!',
-                message: {{ $errors->first() }},
+                message: "{{ $errors->first() }}",
                 position: 'topRight'
             });
         @endif
