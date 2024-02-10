@@ -21,7 +21,7 @@ class ProfileController extends Controller
         // validasi
         $request->validate([
             'name' => 'required|min:2',
-            'photo' => 'required|mimes:png,jpg,jpeg|max:20048'
+            'photo' => 'mimes:png,jpg,jpeg|max:20048'
         ]);
 
         // mengambil data user yang mau di edit profilenya ke dalam variabel user
@@ -43,6 +43,7 @@ class ProfileController extends Controller
         // mengedit data name dan biodata dengan request
         $user->name = $request->name;
         $user->biodata = $request->biodata;
+        
 
         // untuk menyimpan perubahan
         $user->save();
