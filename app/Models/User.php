@@ -21,6 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'photo',
+        'biodata',
         'password',
         'role',
         'github_id',

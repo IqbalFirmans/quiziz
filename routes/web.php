@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,9 +70,8 @@ Route::prefix('user')->group(function () {
     })->name('share');
     // route untuk user yang sudah login
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::get('/profile', function () {
-            return view('user.profile');
-        })->name('profile');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::put('/profile/{id}', [ProfileController::class, 'update_profile'])->name('profile.update');
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     });
 });

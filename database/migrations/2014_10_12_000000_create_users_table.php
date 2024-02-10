@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('github_id')->nullable();
             $table->string('name')->unique();
+            $table->string('photo')->unique()->nullable();
+            $table->text('biodata')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
