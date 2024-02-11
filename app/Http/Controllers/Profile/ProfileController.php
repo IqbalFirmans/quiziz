@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Services\Profile\UpdateProfileService;
 
 class ProfileController extends Controller
 {
+    public $update;
+    public function __construct(UpdateProfileService $update)
+    {
+        $this->update = $update;
+    }
     public function index()
     {
         return view('user.profile');
@@ -18,37 +21,7 @@ class ProfileController extends Controller
 
     public function update_profile($id, Request $request)
     {
-        // dd($request->all());
-        // validasi
-        $request->validate([
-            'name' => 'required|min:2',
-            'photo' => 'mimes:png,jpg,jpeg|max:20048'
-        ]);
-
-        // mengambil data user yang mau di edit profilenya ke dalam variabel user
-        $user = User::findOrFail($id);
-
-        // mengecek apakah ada request file
-        if ($request->hasFile('photo')) {
-
-            // mengecek apakah data photo ada atau tidak
-            if ($user->photo != null) {
-                // jika user memiliki photo maka photo yang sebelumnya dihapus
-                # code...
-                Storage::delete($user->photo);
-            }
-            // mengupload gambar baru dan mengganti isi dari photo dengan direktori gambar yang baru
-            $user->photo = $request->file('photo')->store('profile', 'public');
-        }
-
-        // mengedit data name dan biodata dengan request
-        $user->name = $request->name;
-        $user->biodata = $request->biodata;
-
-
-        // untuk menyimpan perubahan
-        $user->save();
-
+        $this->update->update_profile(User::find($id),$id, $request->all(), $request);
         return redirect()->back()->with('success', 'Berhasil Update Profile');
     }
 }
