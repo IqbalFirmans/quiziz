@@ -75,7 +75,7 @@
                 position: 'topRight'
             });
         @endif
-    
+
         function eye()
         {
             let eye = document.getElementById("eye");
@@ -94,6 +94,28 @@
             let password = document.getElementById("password");
             password.type = "text";
         }
+
+        // new password function
+        function new_eye()
+        {
+            let eye = document.getElementById("new_eye");
+            eye.style.display = "none";
+            let eye_slash = document.getElementById("new_eye_slash");
+            eye_slash.style.display = "block";
+            let new_password = document.getElementById("new_password");
+            new_password.type = "password";
+        }
+        function new_eye_slash()
+        {
+            let eye = document.getElementById("new_eye");
+            eye.style.display = "block";
+            let eye_slash = document.getElementById("new_eye_slash");
+            eye_slash.style.display = "none";
+            let new_password = document.getElementById("new_password");
+            new_password.type = "text";
+        }
+
+
     </script>
 </body>
 

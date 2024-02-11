@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
-use App\Http\Controllers\Profile\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\QuizController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,5 +79,9 @@ Route::prefix('user')->group(function () {
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         // crud kuis
         Route::resource('/quiz', QuizController::class);
+
+        // Change Password
+        Route::get('/change-password', [ChangePasswordController::class, 'change_password'])->name('password.change');
+        Route::put('/change-password', [ChangePasswordController::class, 'password_update'])->name('password.change.update');
     });
 });

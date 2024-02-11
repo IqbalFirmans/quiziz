@@ -25,11 +25,11 @@
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
         }
-
+/*
         .btn:hover {
             background-color: #e91e63;
             border-color: #f7f7ff;
-        }
+        } */
 
         .me-2 {
             margin-right: .5rem !important;
@@ -164,6 +164,7 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="submit" class="btn btn-primary px-4" value="Save Changes">
+                                        <a href="{{ route('password.change') }}" class="btn btn-primary ms-5">Change Password</a>
                                     </div>
                                 </div>
                             </div>
