@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="text-center">
                                     <button type="submit"
-                                        class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                                        class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Change Password</button>
                                 </div>
                             </form>
                         </div>
