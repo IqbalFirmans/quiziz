@@ -63,4 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $url = 'http://127.0.0.1:8000/auth/reset-password/'.$token.'?email='.urlencode($this->email);
         $this->notify(new ResetPasswordNotification($url));
     }
+
+    public function Quizzes()
+    {
+        return $this->hasMany(quizzes::class, 'user_id');
+    }
 }

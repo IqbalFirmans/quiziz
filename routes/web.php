@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,8 +71,12 @@ Route::prefix('user')->group(function () {
     })->name('share');
     // route untuk user yang sudah login
     Route::middleware(['auth', 'verified'])->group(function () {
+        // profile
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::put('/profile/{id}', [ProfileController::class, 'update_profile'])->name('profile.update');
+        // logout
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+        // crud kuis
+        Route::resource('/quiz', QuizController::class);
     });
 });
