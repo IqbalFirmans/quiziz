@@ -10,7 +10,6 @@
         .container {
             font-size: 14px;
             color: #666666;
-            font-family: "Open Sans";
         }
 
         .card-custom {
@@ -67,7 +66,7 @@
         </div>
         <div class="row pt-5 m-auto">
 
-            <div class="col-md-6 col-lg-4 pb-3">
+            {{-- <div class="col-md-6 col-lg-4 pb-3">
 
                 <!-- Add a style="height: XYZpx" to div.card to limit the card height and display scrollbar instead -->
                 <div class="card card-custom bg-white border-white border-0" style="height: 450px">
@@ -92,7 +91,34 @@
                     </div>
                 </div>
 
+            </div> --}}
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="position-absolute bg-dark px-3 py-2 bg-opacity-75 rounded-bottom">
+                        <a href=""
+                        class="text-white text-decoration-none">Quiziz</a>
+                    </div>
+
+                    <img src="https://source.unsplash.com/900x500/" class="card-img-top" alt="">
+
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">Kuis 1</h5>
+
+                        <small class="text-body-secondary">
+                            <p>By. <a href=""
+                                    class="text-decoration-none">User 1</a>
+                                | 3 days ago
+                            </p>
+                        </small>
+
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis nesciunt quaerat laudantium quae velit ad atque eveniet praesentium ipsum ea.</p>
+
+                        <a href="" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
             </div>
+
 
         </div>
     </div>

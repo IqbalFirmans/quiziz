@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuizRequest;
+use App\Models\quizzes;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -25,9 +28,24 @@ class QuizController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(QuizRequest $request)
     {
-        dd($request->all());
+        $data = $request->validated();
+
+        // menyimpan image ke storage
+        $imagePath = $request->file('image')->store('quiz-image');
+
+        $quiz = new quizzes([
+            'user_id' => auth()->user()->id,
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'image' => $imagePath
+        ]);
+
+        $quiz->save();
+
+        return redirect()->route('quiz.index')->with('success', 'Kuis Berhasil Dibuat');
+
     }
 
     /**

@@ -12,7 +12,8 @@ class quizzes extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'description'
+        'description',
+        'image'
     ];
     public function User()
     {

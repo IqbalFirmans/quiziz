@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('quiz.store') }}" method="post">
+            <form action="{{ route('quiz.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h4>Informasi Kuis.</h4>
                 <div class="mb-3">
@@ -14,6 +14,10 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi Kuis</label>
                     <textarea name="description" id="description" class="form-control" cols="30" rows="5" placeholder="Deskripsi Kuis..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Tambah Gambar Kuis</label>
+                    <input type="file" name="image" id="image" class="form-control">
                 </div>
                 <h4>Tambah Pertanyaan.</h4>
                 <div id="add_questions">
