@@ -54,7 +54,9 @@
                                     <p class="text-secondary mb-1">{{ Auth::user()->role }}</p>
                                     <hr>
                                     <button class="btn btn-primary">Follow</button>
-                                    <button class="btn btn-outline-primary">Message</button>
+                                    <a href="/user/quiz">
+                                        <button class="btn btn-outline-primary">Kuis</button>
+                                    </a>
                                 </div>
                             </div>
                             <hr class="my-4">

@@ -28,11 +28,6 @@ class ChangePasswordController extends Controller
             return back()->with('error', 'Password yang Anda masukan tidak sesuai');
         }
 
-        // mengecek apakah password baru yang diinputkan user sesuai dengan konfirmasi password
-        if ($request->new_password != $request->confirm_password) {
-            return back()->with('error', 'Password baru dan Konfirmasi password tidak sesuai');
-        }
-
         // menemukan user yang sedang terautentikasi, kemudian mengupdate password lama yang ada di database dengan password baru dari inputan user yang telah di hash/terenkripsi
         User::find(auth()->user()->id)->update([
             'password' => Hash::make($request->new_password)
