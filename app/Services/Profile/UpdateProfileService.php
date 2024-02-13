@@ -18,7 +18,7 @@ class UpdateProfileService
     {
         $rules = [
             'name' => 'required|min:2',
-            'photo' => 'mimes:png,jpg,jpeg|max:20048'
+            'photo' => 'mimes:png,jpg,jpeg|max:2048'
         ];
         $this->validasi->validate($data, $rules);
         if ($request->hasFile('photo') != null) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Quiz\Owner\QuizController;
+use App\Http\Controllers\ShareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +68,7 @@ Route::prefix('user')->group(function () {
     Route::get('/home', function () {
         return view('user.home');
     })->name('home');
-    Route::get('/share', function () {
-        return view('user.share');
-    })->name('share');
+    Route::get('/share', [ShareController::class, 'index'])->name('share');
     // route untuk user yang sudah login
     Route::middleware(['auth', 'verified'])->group(function () {
         // profile
@@ -87,5 +86,11 @@ Route::prefix('user')->group(function () {
         // Change Password
         Route::get('/change-password', [ChangePasswordController::class, 'change_password'])->name('password.change');
         Route::put('/change-password', [ChangePasswordController::class, 'password_update'])->name('password.change.update');
+
+        // route share
+        Route::get('/share/edit/{id}', [ShareController::class, 'edit'])->name('share.edit');
+        Route::post('/share', [ShareController::class, 'store'])->name('share.store');
+        Route::put('/share/update/{id}', [ShareController::class, 'update'])->name('share.update');
+        Route::delete('/share/destory/{id}', [ShareController::class, 'destroy'])->name('share.destroy');
     });
 });
