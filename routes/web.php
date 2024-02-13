@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuizController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SocialiteController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Quiz\Owner\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,8 +78,12 @@ Route::prefix('user')->group(function () {
         // logout
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         // crud kuis
-        Route::resource('/quiz', QuizController::class);
-
+        Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
+        Route::get('/quiz/create', [QuizController::class, 'create'])->name('quiz.create');
+        Route::get('/quiz/edit/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
+        Route::post('/quiz', [QuizController::class, 'store'])->name('quiz.store');
+        Route::put('/quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
+        Route::delete('/quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
         // Change Password
         Route::get('/change-password', [ChangePasswordController::class, 'change_password'])->name('password.change');
         Route::put('/change-password', [ChangePasswordController::class, 'password_update'])->name('password.change.update');
