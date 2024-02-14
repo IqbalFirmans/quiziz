@@ -14,6 +14,7 @@ use App\Services\Auth\LoginService;
 use App\Services\Auth\RegisterService;
 use App\Services\Auth\SocialiteGithubService;
 use App\Validators\ValidasiValidator;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -44,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // set locale for carbon
+        Carbon::setLocale('id');
     }
 }

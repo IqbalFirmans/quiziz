@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.8",
+        "nesbot/carbon": "^2.72",
         "nwidart/laravel-modules": "^10.0",
         "prettus/l5-repository": "^2.9",
         "stephenjude/extended-artisan-commands": "^3.0"

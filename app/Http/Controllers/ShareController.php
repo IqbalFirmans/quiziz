@@ -38,13 +38,12 @@ class ShareController extends Controller
         // menyimpan file image ke storage
         $imagePath = $request->file('image')->store('share-image');
 
-        $share = new Share([
+        Share::create([
             'user_id' => auth()->user()->id,
-            'image' => $imagePath,
-            'description' => $request->description
-        ]);
+            'description' => $request->description,
+            'image' => $imagePath
 
-        $share->save();
+        ]);
 
         return back()->with('success', 'Postingan Berhasil dibuat!');
     }
