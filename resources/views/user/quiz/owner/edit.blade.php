@@ -17,7 +17,7 @@
             @endforeach
             <div class="mb-3">
                 <select class="form-select" name="answer_true" aria-label="Default select example">
-                    <option selected>Pilih jawaban yang benar</option>
+                    <option value="{{ null }}" selected>Pilih jawaban yang benar</option>
                     @foreach ($question->Options as $number => $option)
                      <option value="{{ $option->id }}" {{ $option->true_or_false == 1 ? 'selected' : '' }}>{{ chr(65 + $number) }}</>
                     @endforeach

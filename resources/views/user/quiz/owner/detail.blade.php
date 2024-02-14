@@ -7,9 +7,57 @@
             <p>
                 {{ $quiz->description }}
             </p>
-            <button type="submit" class="btn btn-white bg-primary border border-white text-white">Publikasikan</button>
-            <button type="submit" data-bs-toggle="collapse" data-bs-target="#collapse_edit" class="btn btn-white bg-warning border border-white text-white">Edit</button>
-
+            <button type="button" data-bs-toggle="modal" data-bs-target="#publication"
+                class="btn btn-white bg-primary border border-white text-white">Publikasikan</button>
+            <button type="button" data-bs-toggle="collapse" data-bs-target="#collapse_edit"
+                class="btn btn-white bg-warning border border-white text-white">Edit</button>
+            <br>
+            @if ($quiz->publication_status)
+             <small>nb: kuis anda telah diplublikasikan secara {{ $quiz->publication_status }}</small>
+            @endif
+            <!-- Modal -->
+            <div class="modal fade" id="publication" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Publikasi</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('quiz.publication', $quiz->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body text-center">
+                                <b>Publikasikan Kuis Anda.</b>
+                                <div class="" style="text-align: left;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="publik" name="status" id="flexRadioDefault1" {{ $quiz->publication_status == 'publik' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          Status Publik
+                                        </label> <br>
+                                        <small>
+                                            nb: dengan status publik, kuis anda bisa diakses siapapun tanpa kode khusus.
+                                        </small>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="private" name="status" id="flexRadioDefault2" {{ $quiz->publication_status == 'private' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          Status Private
+                                        </label> <br>
+                                        <small>
+                                            nb: dengan status private, kuis anda tidak bisa diakses siapapun tanpa kode khusus.
+                                        </small>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-white bg-primary border border-white text-white">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="mt-2 mb-5 collapse" id="collapse_edit">
@@ -19,15 +67,16 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Kuis</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ $quiz->name }}">
+                        <input type="text" name="name" id="name" class="form-control"
+                            value="{{ $quiz->name }}">
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Deskripsi</label>
                         <textarea name="description" id="description" class="form-control" cols="30" rows="5">{{ $quiz->description }}</textarea>
                     </div>
                     <div class="mb-3">
-                        <button type="submit"
-                        class="btn btn-white bg-primary text-white border border-white">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-white bg-primary text-white border border-white">Simpan
+                            Perubahan</button>
                     </div>
                 </form>
                 <hr>
@@ -37,30 +86,30 @@
                 <h5>Tambah Pertanyaan dan Jawaban</h5>
                 <div class="mb-3">
                     <label for="question" class="form-label">Pertanyaan</label>
-                    <textarea name="question" id="question" class="form-control" cols="30" rows="5">{{ old('question') }}</textarea>
+                    <textarea name="question" id="question" class="form-control" cols="30" rows="5" placeholder="Pertanyaan...">{{ old('question') }}</textarea>
                 </div>
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-3">
                             <textarea placeholder="Jawaban A..." name="answer_1" id="answer_a" class="form-control my-1" cols="30"
-                                rows="3"></textarea>
+                                rows="3">{{ old('answer_1') }}</textarea>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3">
                             <textarea placeholder="Jawaban B..." name="answer_2" id="answer_b" class="form-control my-1" cols="30"
-                                rows="3"></textarea>
+                                rows="3">{{ old('answer_2') }}</textarea>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3">
                             <textarea placeholder="Jawaban C..." name="answer_3" id="answer_c" class="form-control my-1" cols="30"
-                                rows="3"></textarea>
+                                rows="3">{{ old('answer_3') }}</textarea>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-3">
                             <textarea placeholder="Jawaban D..." name="answer_4" id="answer_d" class="form-control my-1" cols="30"
-                                rows="3"></textarea>
+                                rows="3">{{ old('answer_4') }}</textarea>
                         </div>
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="answer_true" aria-label="Default select example">
-                            <option selected>Pilih jawaban yang benar</option>
+                            <option value="{{ null }}" selected>Pilih jawaban yang benar</option>
                             <option value="1">A</option>
                             <option value="2">B</option>
                             <option value="3">C</option>
@@ -125,11 +174,11 @@
                                 </div>
                             </div>
                             <a href="{{ route('edit.question', $question->id) }}">
-                                <svg class="text-warning" xmlns="http://www.w3.org/2000/svg"
-                                width="22" height="22" viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M8 12h8v2H8zm2 8H6V4h7v5h5v3.1l2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4zm-2-2h4.1l.9-.9V16H8zm12.2-5c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1l-2.1-2.1l1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z" />
-                            </svg>
+                                <svg class="text-warning" xmlns="http://www.w3.org/2000/svg" width="22"
+                                    height="22" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M8 12h8v2H8zm2 8H6V4h7v5h5v3.1l2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4zm-2-2h4.1l.9-.9V16H8zm12.2-5c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1l-2.1-2.1l1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z" />
+                                </svg>
                             </a>
                         </div>
                     </div>

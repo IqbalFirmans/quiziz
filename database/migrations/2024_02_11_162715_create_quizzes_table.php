@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->text('description');
+            $table->date('publication_at')->nullable();
+            $table->tinyText('publication_status')->nullable();
             $table->timestamps();
         });
     }

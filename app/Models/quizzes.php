@@ -14,6 +14,8 @@ class quizzes extends Model
         'user_id',
         'name',
         'description',
+        'publication_at',
+        'publication_status'
     ];
     public static function boot()
     {

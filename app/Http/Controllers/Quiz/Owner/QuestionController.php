@@ -13,6 +13,10 @@ class QuestionController extends Controller
     public function store(QuestionRequest $request, $id)
     {
         $data = $request->validated();
+        if ($data['answer_true'] == null) {
+            # code...
+            return redirect()->back()->withErrors('Jawaban benar tidak terisi!');
+        }
         $questions = questions_quizzes::create([
             'quiz_id' => $id,
             'question' => $data['question']
@@ -40,10 +44,15 @@ class QuestionController extends Controller
         $question = questions_quizzes::findOrFail($id);
         return view('user.quiz.owner.edit', compact('question'));
     }
-    public function update($id, QuestionRequest $request)
+    public function update($id, QuestionRequest $req)
     {
         try {
+            $request = $req->validated();
             //code...
+            if ($request['answer_true'] == null) {
+                # code...
+                return redirect()->back()->withErrors('Jawaban benar tidak terisi!');
+            }
             $question = questions_quizzes::findOrFail($id);
             $question->update([
                 'question' => $request['question']

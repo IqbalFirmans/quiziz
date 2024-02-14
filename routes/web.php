@@ -89,6 +89,8 @@ Route::prefix('user')->group(function () {
         Route::delete('/destroy/pertanyaan/{id}', [QuestionController::class, 'destroy'])->name('destroy.question');
         Route::get('/edit/pertanyaan/{id}', [QuestionController::class, 'edit'])->name('edit.question');
         Route::put('/update/pertanyaan/{id}', [QuestionController::class, 'update'])->name('update.question');
+        // publikasi kuis
+        Route::put('/publikasi/kuis/{id}', [QuizController::class, 'publication'])->name('quiz.publication');
         // Change Password
         Route::get('/change-password', [ChangePasswordController::class, 'change_password'])->name('password.change');
         Route::put('/change-password', [ChangePasswordController::class, 'password_update'])->name('password.change.update');

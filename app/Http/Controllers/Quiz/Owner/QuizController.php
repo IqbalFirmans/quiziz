@@ -7,6 +7,9 @@ use App\Models\quizzes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\QuizRequest;
+use App\Models\options_questions;
+use App\Models\questions_quizzes;
+
 class QuizController extends Controller
 {
     public function index()
@@ -52,5 +55,19 @@ class QuizController extends Controller
             # code...
             return redirect()->back()->with('success', 'Sukses menghapus kuis!');
         }
+    }
+    public function publication($id, Request $request)
+    {
+        $quiz = quizzes::findOrFail($id);
+        $check_options = questions_quizzes::where('quiz_id', $id)->count();
+        if ($check_options < 3) {
+            # code...
+            return redirect()->back()->withErrors('Jumlah pertanyaan pada kuis ini belum sampai minimal yakni 3 pertanyaan.');
+        }
+        $quiz->update([
+            'publication_at' => now(),
+            'publication_status' => $request->status
+        ]);
+        return redirect()->back()->with('success', 'Sukses mempublikasikan kuis anda.');
     }
 }
