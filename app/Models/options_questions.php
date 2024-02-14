@@ -14,7 +14,7 @@ class options_questions extends Model
         'option',
         'true_or_false'
     ];
-    public function Questions()
+    public function Question()
     {
         $this->belongsTo(questions_quizzes::class, 'question_id');
     }

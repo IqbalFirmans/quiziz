@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Quiz\Owner\QuestionController;
 use App\Http\Controllers\Quiz\Owner\QuizController;
 use App\Http\Controllers\ShareController;
 
@@ -83,6 +84,9 @@ Route::prefix('user')->group(function () {
         Route::post('/quiz', [QuizController::class, 'store'])->name('quiz.store');
         Route::put('/quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
         Route::delete('/quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+        // detail kuis (crud pertanyaan dan jawaban)
+        Route::get('/detail-quiz/{id}', [QuizController::class, 'show'])->name('quiz.show');
+        Route::post('/store/pertanyaan/{id}', [QuestionController::class, 'store'])->name('store.question');
         // Change Password
         Route::get('/change-password', [ChangePasswordController::class, 'change_password'])->name('password.change');
         Route::put('/change-password', [ChangePasswordController::class, 'password_update'])->name('password.change.update');
