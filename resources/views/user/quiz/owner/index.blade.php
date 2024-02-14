@@ -82,7 +82,6 @@
                             </p>
                         </div>
                         <div class="card-footer d-flex gap-1 justify-content-center" style="background: inherit; border-color: inherit;">
-                            <a href="#" class="btn btn-white bg-warning border border-white text-white">Edit</a>
                             <a href="#" data-bs-toggle="modal"
                                 data-bs-target="#modal_confirm_delete{{ $quiz->id }}"
                                 class="btn btn-white bg-danger border border-white text-white">Hapus</a>

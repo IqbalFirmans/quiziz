@@ -8,8 +8,30 @@
                 {{ $quiz->description }}
             </p>
             <button type="submit" class="btn btn-white bg-primary border border-white text-white">Publikasikan</button>
+            <button type="submit" data-bs-toggle="collapse" data-bs-target="#collapse_edit" class="btn btn-white bg-warning border border-white text-white">Edit</button>
+
         </div>
         <div class="card-body">
+            <div class="mt-2 mb-5 collapse" id="collapse_edit">
+                <h5>Edit Kuis</h5>
+                <form action="{{ route('quiz.update', $quiz->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama Kuis</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $quiz->name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Deskripsi</label>
+                        <textarea name="description" id="description" class="form-control" cols="30" rows="5">{{ $quiz->description }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit"
+                        class="btn btn-white bg-primary text-white border border-white">Simpan Perubahan</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
             <form action="{{ route('store.question', $quiz->id) }}" method="post">
                 @csrf
                 <h5>Tambah Pertanyaan dan Jawaban</h5>

@@ -9,8 +9,8 @@
         }
 
         /* .btn-primary {
-                background-color: #e91e63;
-            } */
+                    background-color: #e91e63;
+                } */
 
         .card {
             position: relative;
@@ -25,11 +25,12 @@
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
         }
-/*
-        .btn:hover {
-            background-color: #e91e63;
-            border-color: #f7f7ff;
-        } */
+
+        /*
+            .btn:hover {
+                background-color: #e91e63;
+                border-color: #f7f7ff;
+            } */
 
         .me-2 {
             margin-right: .5rem !important;
@@ -43,22 +44,22 @@
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 @if (Auth::user()->photo != null)
-                                    <img src="{{ asset('storage/'. Auth::user()->photo) }}" alt="Admin"
-                                    class="rounded-circle p-1 " width="110">
+                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Admin"
+                                        class="rounded-circle p-1 " width="110">
                                 @else
-                                    <img src="{{ asset('default.png') }}" alt="Admin"
-                                    class="rounded-circle p-1" width="110">
+                                    <img src="{{ asset('default.png') }}" alt="Admin" class="rounded-circle p-1"
+                                        width="110">
                                 @endif
                                 <div class="mt-3">
                                     <h4>{{ Auth::user()->name }}</h4>
                                     <p class="text-secondary mb-1">{{ Auth::user()->role }}</p>
                                     <hr>
-                                    <button class="btn btn-primary">Follow</button>
                                     <a href="/user/quiz">
-                                        <button class="btn btn-outline-primary">Kuis</button>
+                                        <button class="btn btn-white bg-primary border border-white text-white">Kuis</button>
                                     </a>
                                 </div>
                             </div>
+                            {{--
                             <hr class="my-4">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -119,12 +120,14 @@
                                     <span class="text-secondary">bootdey</span>
                                 </li>
                             </ul>
+                            --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="card">
-                        <form action="{{ route('profile.update', Auth::user()->id ) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('profile.update', Auth::user()->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -162,16 +165,16 @@
                                         <input type="file" name="photo" class="form-control">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="submit" class="btn btn-primary px-4" value="Save Changes">
-                                        <a href="{{ route('password.change') }}" class="btn btn-primary ms-5">Change Password</a>
-                                    </div>
+
+                                <div class="">
+                                    <input type="submit" class="btn btn-white bg-primary border border-white text-white mb-3" value="Simpan">
+                                    <a href="{{ route('password.change') }}" class="btn btn-white bg-warning border border-white text-white mb-3">Ubah
+                                        Password</a>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    {{--
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -201,6 +204,7 @@
                             </div>
                         </div>
                     </div>
+                    --}}
                 </div>
             </div>
         </div>

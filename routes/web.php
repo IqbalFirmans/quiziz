@@ -80,7 +80,6 @@ Route::prefix('user')->group(function () {
         // crud kuis
         Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
         Route::get('/quiz/create', [QuizController::class, 'create'])->name('quiz.create');
-        Route::get('/quiz/edit/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
         Route::post('/quiz', [QuizController::class, 'store'])->name('quiz.store');
         Route::put('/quiz/update/{id}', [QuizController::class, 'update'])->name('quiz.update');
         Route::delete('/quiz/destroy/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');

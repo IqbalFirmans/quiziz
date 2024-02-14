@@ -38,13 +38,12 @@ class QuizController extends Controller
         return redirect()->route('quiz.index')->with('success', 'Kuis Berhasil Dibuat');
 
     }
-    public function edit($id)
+    public function update($id, QuizRequest $request)
     {
-        return view('user.quiz.owner.edit');
-    }
-    public function update($id, Request $request)
-    {
-
+        $data = $request->validated();
+        $quiz = quizzes::findOrFail($id);
+        $quiz->update($data);
+        return redirect()->back()->with('success', 'Sukses merubah informasi kuis.');
     }
     public function destroy($id)
     {
