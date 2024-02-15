@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Share;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class ShareController extends Controller
@@ -12,7 +12,7 @@ class ShareController extends Controller
      */
     public function index()
     {
-        $data = Share::latest()->get();
+        $data = Post::latest()->get();
 
         return view('user.share', compact('data'));
     }
@@ -36,9 +36,9 @@ class ShareController extends Controller
         ]);
 
         // menyimpan file image ke storage
-        $imagePath = $request->file('image')->store('share-image');
+        $imagePath = $request->file('image')->store('posts-image');
 
-        Share::create([
+        Post::create([
             'user_id' => auth()->user()->id,
             'description' => $request->description,
             'image' => $imagePath
