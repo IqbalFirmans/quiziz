@@ -46,7 +46,7 @@
                                         <h6 class="mb-0">Description</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <textarea name="description" class="form-control" rows="5" placeholder=""></textarea>
+                                        <textarea name="description" class="form-control" rows="5" placeholder="">{{ old('description') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">

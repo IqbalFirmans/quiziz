@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Profile\MyPostsController;
 use App\Http\Controllers\Quiz\Owner\QuestionController;
 use App\Http\Controllers\Quiz\Owner\QuizController;
 use App\Http\Controllers\ShareController;
@@ -100,5 +101,12 @@ Route::prefix('user')->group(function () {
         Route::post('/share', [ShareController::class, 'store'])->name('share.store');
         Route::put('/share/update/{id}', [ShareController::class, 'update'])->name('share.update');
         Route::delete('/share/destory/{id}', [ShareController::class, 'destroy'])->name('share.destroy');
+
+
+        // route my posts
+        Route::get('/my-posts', [MyPostsController::class, 'index'])->name('myposts.index');
+        Route::get('/my-posts/edit/{id}', [MyPostsController::class, 'edit'])->name('myposts.edit');
+        Route::put('/my-posts/update/{id}', [MyPostsController::class, 'update'])->name('myposts.update');
+        Route::delete('/my-posts/destroy/{id}', [MyPostsController::class, 'destroy'])->name('myposts.destroy');
     });
 });

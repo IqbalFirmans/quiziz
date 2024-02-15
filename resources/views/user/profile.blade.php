@@ -54,6 +54,9 @@
                                     <h4>{{ Auth::user()->name }}</h4>
                                     <p class="text-secondary mb-1">{{ Auth::user()->role }}</p>
                                     <hr>
+                                    <a href="/user/my-posts">
+                                        <button class="btn btn-white bg-warning border border-white text-white">My Posts</button>
+                                    </a>
                                     <a href="/user/quiz">
                                         <button class="btn btn-white bg-primary border border-white text-white">Kuis</button>
                                     </a>
