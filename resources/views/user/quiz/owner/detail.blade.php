@@ -11,9 +11,12 @@
                 class="btn btn-white bg-primary border border-white text-white">Publikasikan</button>
             <button type="button" data-bs-toggle="collapse" data-bs-target="#collapse_edit"
                 class="btn btn-white bg-warning border border-white text-white">Edit</button>
+            <a href="/user/quiz">
+                <button type="button" class="btn btn-secondary">Kembali</button>
+            </a>
             <br>
             @if ($quiz->publication_status)
-             <small>nb: kuis anda telah diplublikasikan secara {{ $quiz->publication_status }}</small>
+                <small>nb: kuis anda telah diplublikasikan secara {{ $quiz->publication_status }}</small>
             @endif
             <!-- Modal -->
             <div class="modal fade" id="publication" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -31,28 +34,34 @@
                                 <b>Publikasikan Kuis Anda.</b>
                                 <div class="" style="text-align: left;">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="publik" name="status" id="flexRadioDefault1" {{ $quiz->publication_status == 'publik' ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" value="publik" name="status"
+                                            id="flexRadioDefault1"
+                                            {{ $quiz->publication_status == 'publik' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault1">
-                                          Status Publik
+                                            Status Publik
                                         </label> <br>
                                         <small>
                                             nb: dengan status publik, kuis anda bisa diakses siapapun tanpa kode khusus.
                                         </small>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="private" name="status" id="flexRadioDefault2" {{ $quiz->publication_status == 'private' ? 'checked' : '' }}>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="private" name="status"
+                                            id="flexRadioDefault2"
+                                            {{ $quiz->publication_status == 'private' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault2">
-                                          Status Private
+                                            Status Private
                                         </label> <br>
                                         <small>
-                                            nb: dengan status private, kuis anda tidak bisa diakses siapapun tanpa kode khusus.
+                                            nb: dengan status private, kuis anda tidak bisa diakses siapapun tanpa kode
+                                            khusus.
                                         </small>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-white bg-primary border border-white text-white">Kirim</button>
+                                <button type="submit"
+                                    class="btn btn-white bg-primary border border-white text-white">Kirim</button>
                             </div>
                         </form>
                     </div>

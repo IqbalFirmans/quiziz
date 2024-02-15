@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Store;
+namespace App\Contracts\Basic;
 
 interface StoreInterface{
     public function store($data);

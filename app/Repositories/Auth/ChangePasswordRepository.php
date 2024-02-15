@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Auth;
 
-use App\Contracts\Store\UpdateInterface;
+use App\Contracts\Basic\UpdateInterface;
 use App\Models\User;
 use App\Validators\ValidasiValidator;
 use Illuminate\Support\Facades\Hash;

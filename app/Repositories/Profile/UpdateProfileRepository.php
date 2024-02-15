@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Profile;
 
-use App\Contracts\Store\UpdateInterface;
-use App\Contracts\Store\UpdateWithFileInterface;
+use App\Contracts\Basic\UpdateInterface;
+use App\Contracts\Basic\UpdateWithFileInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 

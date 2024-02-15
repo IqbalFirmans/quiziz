@@ -59,9 +59,12 @@
     </style>
 
     <div class="container">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex gap-2 justify-content-center">
             <a href="/user/quiz/create">
                 <button type="button" class="btn bg-primary border border-white btn-primary">Buat Kuis Baru</button>
+            </a>
+            <a href="/user/profile">
+                <button type="button" class="btn btn-secondary">Kembali</button>
             </a>
         </div>
         <div class="row pt-5 m-auto">

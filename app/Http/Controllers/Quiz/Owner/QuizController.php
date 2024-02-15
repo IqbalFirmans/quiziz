@@ -9,9 +9,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\QuizRequest;
 use App\Models\options_questions;
 use App\Models\questions_quizzes;
+use App\Repositories\Quiz\QuizRepository;
+use App\Services\Quiz\PublicationQuizService;
 
 class QuizController extends Controller
 {
+    public $quiz, $publication;
+    public function __construct(QuizRepository $quiz,  PublicationQuizService $publication)
+    {
+        $this->quiz = $quiz;
+        $this->publication = $publication;
+    }
     public function index()
     {
         $all_quiz = quizzes::where('user_id', Auth::user()->id)->get();
@@ -30,13 +38,7 @@ class QuizController extends Controller
     {
         $data = $request->validated();
 
-        $quiz = new quizzes([
-            'user_id' => auth()->user()->id,
-            'name' => $data['name'],
-            'description' => $data['description'],
-        ]);
-
-        $quiz->save();
+       $this->quiz->store($data);
 
         return redirect()->route('quiz.index')->with('success', 'Kuis Berhasil Dibuat');
 
@@ -44,8 +46,7 @@ class QuizController extends Controller
     public function update($id, QuizRequest $request)
     {
         $data = $request->validated();
-        $quiz = quizzes::findOrFail($id);
-        $quiz->update($data);
+        $this->quiz->update($id, $data);
         return redirect()->back()->with('success', 'Sukses merubah informasi kuis.');
     }
     public function destroy($id)
@@ -58,16 +59,11 @@ class QuizController extends Controller
     }
     public function publication($id, Request $request)
     {
-        $quiz = quizzes::findOrFail($id);
-        $check_options = questions_quizzes::where('quiz_id', $id)->count();
-        if ($check_options < 3) {
+        $publication = $this->publication->publication($id, $request->all());
+        if ($publication == false) {
             # code...
-            return redirect()->back()->withErrors('Jumlah pertanyaan pada kuis ini belum sampai minimal yakni 3 pertanyaan.');
+            return redirect()->back()->withErrors('Gagal publikasi, pertanyaan kurang.');
         }
-        $quiz->update([
-            'publication_at' => now(),
-            'publication_status' => $request->status
-        ]);
         return redirect()->back()->with('success', 'Sukses mempublikasikan kuis anda.');
     }
 }
