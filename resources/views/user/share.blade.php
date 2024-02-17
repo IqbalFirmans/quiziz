@@ -23,6 +23,14 @@
         }
     </style>
 
+    @push('css')
+        @livewireStyles
+    @endpush
+
+    @push('js')
+        @livewireScripts
+    @endpush
+
     <div class="container mt-4 mb-5">
         <div class="d-flex justify-content-center">
             <div class="col-lg-12">
@@ -89,66 +97,14 @@
                             <i class="fa fa-thumbs-up text-primary">
                                 <small>10</small>
                             </i>
-                            <a href="#comments_section" data-bs-toggle="collapse">
+                            <a href="#comments_section{{ $posts->id }}" data-bs-toggle="collapse">
                                 <i class="fa fa-comments"></i>
                             </a>
                         </div>
-                        <div class="collapse" id="comments_section">
-                            <section class="gradient-custom mb-4">
-                                <div class="d-flex justify-content-center">
-                                    <div class="card">
-                                        <div class="card-body p-4">
-                                            <h4 class="text-center mb-4 pb-2">Nested comments section</h4>
-                                            <form action="" method="post">
-                                                @csrf
-                                                <textarea name="komentar" id="komentar" placeholder="Komentar..." class="form-control" cols="15" rows="5"></textarea>
-                                                <button type="submit" class="btn btn-primary mt-3"
-                                                    style="background-color: #e91e63;border:1px solid #e91e63;">Kirim</button>
-                                            </form>
-                                            <div class="mt-3">
-                                                <div class="">
-                                                    <div class="d-flex flex-start my-2">
-                                                        <img class="rounded-circle shadow-1-strong me-3"
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
-                                                            alt="avatar" width="35" height="35" />
-                                                        <div class="flex-grow-1 flex-shrink-1">
-                                                            <div>
-                                                                <div
-                                                                    class="d-flex justify-content-between align-items-center">
-                                                                    <p class="mb-1">
-                                                                        Maria Smantha <br>
-                                                                        <span class="small">2 hours
-                                                                            ago</span>
-                                                                    </p>
-                                                                    <a href="#reply_comments_section"
-                                                                        data-bs-toggle="collapse" class="text-primary"><i
-                                                                            class="fas fa-reply fa-xs"></i><span
-                                                                            class="small"> reply</span></a>
-                                                                </div>
-                                                                <p class="small mb-0">
-                                                                    It is a long established fact that a reader
-                                                                    will be
-                                                                    distracted by
-                                                                    the readable content of a page.
-                                                                </p>
-                                                            </div>
-                                                            <div class="collapse" id="reply_comments_section">
-                                                                <form action="" method="post" class="mt-2">
-                                                                    @csrf
-                                                                    <textarea name="komentar" id="komentar" placeholder="Komentar..." class="form-control" cols="15" rows="5"></textarea>
-                                                                    <button type="submit" class="btn btn-primary mt-3"
-                                                                        style="background-color: #e91e63;border:1px solid #e91e63;">Kirim</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                        <div class="collapse" id="comments_section{{ $posts->id }}">
+                            @livewire('posts.comment', ['id' => $posts->id])
                         </div>
+
                     </div>
                 @empty
                 <div class="d-flex justify-content-center">

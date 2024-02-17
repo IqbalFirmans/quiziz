@@ -12,7 +12,9 @@ class ShareController extends Controller
      */
     public function index()
     {
-        $data = Post::latest()->get();
+
+        // menerapkan eager loading
+        $data = Post::with('user')->latest()->get();
 
         return view('user.share', compact('data'));
     }

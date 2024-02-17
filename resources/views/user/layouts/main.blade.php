@@ -133,6 +133,7 @@
             /* Scrollable contents if viewport is shorter than content. */
         }
     </style>
+    @stack('css')
 </head>
 
 <body>
@@ -237,6 +238,7 @@
             });
         @endif
     </script>
+    @stack('js')
 </body>
 
 </html>

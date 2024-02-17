@@ -7,10 +7,6 @@
             font-size: 12px !important
         }
 
-        button {
-            background-color: #fbfbfb;
-        }
-
         .socials i {
             margin-right: 14px;
             font-size: 17px;
@@ -66,15 +62,41 @@
                                     <i class="fa fa-edit text-warning"></i>
                                 </a>
 
-                                <form action="{{ route('myposts.destroy', $post->id) }}" method="post" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" class="border-0">
-                                        <i class="fa fa-times-circle text-danger">
-                                            <small></small>
-                                        </i>
-                                    </button>
-                                </form>
+                                <a href="" data-bs-toggle="modal"
+                                    data-bs-target="#modal_confirm_delete{{ $post->id }}">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                </a>
+
+                                {{-- modal delete --}}
+                                <div class="modal fade" id="modal_confirm_delete{{ $post->id }}"
+                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Hapus</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('myposts.destroy', $post->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body text-center">
+                                                    <b>
+                                                        Apakah anda yakin mau menghapus potingan ini?
+                                                    </b>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- end modal --}}
+
                             </div>
                         </div>
                     </div>
