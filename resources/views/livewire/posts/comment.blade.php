@@ -44,12 +44,14 @@
                                     <div class="flex-grow-1 flex-shrink-1">
                                         <div>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">{{ $comment->user->name }}
-                                                    <br>
+                                                <p class="mb-1">
+                                                    <span class="fw-bold">{{ $comment->user->name }}</span>
                                                     <span
                                                         class="small">{{ $comment->created_at->diffForHumans() }}</span>
+                                                    <br>
                                                 </p>
-                                                <a href="#reply_comments_section" data-bs-toggle="collapse"
+
+                                                <a href="#reply_comments_section{{ $comment->id }}" data-bs-toggle="collapse"
                                                     class="text-primary">
                                                     <i class="fas fa-reply fa-xs"></i>
                                                     <span class="small">reply</span>
@@ -59,35 +61,63 @@
                                                 {{ $comment->body }}
                                             </p>
                                             <div class="d-flex gap-2">
+                                                @guest
+                                                    <button class="text-dark">
+
+                                                        <i class="fas fa-thumbs-up text-dark"></i>
+
+                                                        {{ $comment->totalLikes() }}
+                                                    </button>
+                                                @endguest
 
                                                 @auth
-                                                    @if ($comment->hasLike())
-                                                        <button wire:click="like({{ $comment->id }})" class="text-primary">
-                                                            <i class="fas fa-thumbs-up text-primary"></i>
-                                                            {{ $comment->totalLikes() }}
+                                                    <button wire:click="like({{ $comment->id }})"
+                                                        class="text-{{ $comment->hasLike ? 'primary' : 'dark' }}">
+
+                                                        <i class="fas fa-thumbs-up text-{{ $comment->hasLike ? 'primary' : 'dark' }}"></i>
+
+                                                        {{ $comment->totalLikes() }}
+                                                    </button>
+
+                                                    @if ($comment->user_id == Auth::user()->id)
+                                                        <button wire:click="selectEdit({{ $comment->id }})">
+                                                            <i class="fas fa-edit text-warning"></i>
                                                         </button>
-                                                    @else
-                                                        <button wire:click="like({{ $comment->id }})" class="text-dark">
-                                                            <i class="fas fa-thumbs-up text-dark"></i>
-                                                            {{ $comment->totalLikes() }}
+
+                                                        <button wire:click="delete({{ $comment->id }})">
+                                                            <i class="fas fa-times-circle text-danger"></i>
                                                         </button>
                                                     @endif
                                                 @endauth
 
-                                                <span>
-                                                    <i class="fas fa-edit text-warning"></i>
-                                                </span>
-
-                                                <span>
-                                                    <i class="fas fa-times-circle text-danger"></i>
-                                                </span>
                                             </div>
+
+                                            @if (isset($edit_comment_id) && $edit_comment_id == $comment->id)
+                                                <form wire:submit.prevent="update" class="py-2">
+                                                    @csrf
+                                                    <textarea wire:model.defer="update_body" id="komentar" class="form-control @error('update_body') is-invalid @enderror" rows="2"></textarea>
+
+                                                    @error('update_body')
+                                                        <div class="text-danger" role="alert">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                    <button type="submit" class="badge bg-primary mt-2 "
+                                                        style="background-color: #e91e63;border:1px solid #e91e63;">Update</button>
+                                                    <!-- Tombol Cancel -->
+                                                    <button type="button" wire:click="cancelEdit"
+                                                        class="badge bg-secondary mt-2">
+                                                        Batal
+                                                    </button>
+                                                </form>
+                                            @endif
+
                                         </div>
-                                        <div class="collapse" id="reply_comments_section">
+                                        <div class="collapse" id="reply_comments_section{{ $comment->id }}">
                                             <form action="" method="post" class="mt-2">
                                                 @csrf
-                                                <textarea name="komentar" id="komentar" placeholder="Komentar..." class="form-control" cols="15" rows="5"></textarea>
-                                                <button type="submit" class="btn btn-primary mt-3"
+                                                <textarea name="komentar" id="komentar" placeholder="Balas Komentar..." class="form-control"  rows="2"></textarea>
+                                                <button type="submit" class="badge bg-primary mt-2"
                                                     style="background-color: #e91e63;border:1px solid #e91e63;">Kirim</button>
                                             </form>
                                         </div>
