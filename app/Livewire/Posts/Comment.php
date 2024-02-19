@@ -3,6 +3,7 @@
 namespace App\Livewire\Posts;
 
 use App\Models\Comment as ModelsComment;
+use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -19,7 +20,7 @@ class Comment extends Component
     {
 
         return view('livewire.posts.comment', [
-            'comments' => ModelsComment::where('post_id', $this->post->id)->get(),
+            'comments' => ModelsComment::with('user')->where('post_id', $this->post->id)->latest()->get(),
             'total_comments' => ModelsComment::where('post_id', $this->post->id)->count(),
         ]);
     }
@@ -34,8 +35,25 @@ class Comment extends Component
         ]);
 
         if ($comment) {
-            session()->flash('success', 'Kommentar Berhasil dibuat');
-            return redirect()->route('share');
+            $this->body = null;
         }
+    }
+
+    public function like($id)
+    {
+        $data = [
+            'comment_id' => $id,
+            'user_id' => Auth::user()->id
+        ];
+
+        $like = Like::where($data);
+
+        if ($like->count() > 0) {
+            $like->delete();
+        } else {
+            Like::create($data);
+        }
+
+        return NULL;
     }
 }
