@@ -32,7 +32,9 @@
         <script>
             Livewire.on('comment_store', commentId => {
                 let helloScroll = document.getElementById('comment-' + commentId);
-                helloScroll.scrollIntoView({behavior: 'smooth'}, true);
+                helloScroll.scrollIntoView({
+                    behavior: 'smooth'
+                }, true);
             })
         </script>
     @endpush
@@ -89,8 +91,7 @@
 
                                         <div class="d-flex flex-column flex-wrap ml-2 px-3">
                                             <span class="font-weight-bold">{{ $post->user->name }}</span>
-                                            <span
-                                                class="text-black-30 time">{{ $post->created_at->diffForHumans() }}</span>
+                                            <span class="text-black-30 time">{{ $post->created_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
                                 </div>

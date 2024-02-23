@@ -16,6 +16,11 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function childrens()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function hasLike()
     {
         return $this->hasOne(Like::class, 'likes.user_id', Auth::user()->id);

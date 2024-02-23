@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class Comment extends Component
 {
-    public $post, $body, $update_body;
-    public $edit_comment_id;
+    public $post, $body, $body2;
+    public $comment_id, $edit_comment_id;
 
     public function mount($id)
     {
@@ -22,7 +22,9 @@ class Comment extends Component
     {
 
         return view('livewire.posts.comment', [
-            'comments' => ModelsComment::with('user')->where('post_id', $this->post->id)->latest()->get(),
+            'comments' => ModelsComment::with(['user', 'childrens'])
+            ->where('post_id', $this->post->id)
+            ->whereNull('comment_id')->latest()->get(),
             'total_comments' => ModelsComment::where('post_id', $this->post->id)->count(),
         ]);
     }
@@ -38,6 +40,44 @@ class Comment extends Component
 
         if ($comment) {
             $this->body = null;
+            session()->flash('success', 'Komentar berhasil dibuat');
+        } else {
+            session()->flash('error', 'Komentar gagal dibuat');
+        }
+    }
+
+    public function selectReply($id)
+    {
+        $this->comment_id = $id;
+        $this->edit_comment_id = NULL;
+        $this->body2 = NULL;
+    }
+
+    public function cancelReply()
+    {
+        // Reset data atau melakukan aksi pembatalan lainnya
+        $this->comment_id = null;
+        $this->body2 = '';
+
+    }
+
+    public function reply()
+    {
+        $this->validate(['body2' => 'required']);
+        $comment = ModelsComment::find($this->comment_id);
+        $comment = ModelsComment::create([
+            'user_id' => Auth::user()->id,
+            'post_id' => $this->post->id,
+            'body' => $this->body2,
+            'comment_id' => $comment->comment_id ? $comment->comment_id : $comment->id
+        ]);
+
+        if ($comment) {
+            $this->body2 = null;
+            $this->comment_id = NULL;
+            session()->flash('success', 'Komentar berhasil dibuat');
+        } else {
+            session()->flash('error', 'Komentar gagal dibuat');
         }
     }
 
@@ -45,32 +85,39 @@ class Comment extends Component
     {
         $comment = ModelsComment::find($id);
         $this->edit_comment_id = $comment->id;
-        $this->update_body = $comment->body;
+        $this->body2 = $comment->body;
+        $this->comment_id = NULL;
     }
 
     public function cancelEdit()
     {
         // Reset data atau melakukan aksi pembatalan lainnya
         $this->edit_comment_id = null;
-        $this->update_body = '';
+        $this->body2 = '';
 
     }
 
 
     public function update()
     {
-        $this->validate(['update_body' => 'required']);
+        $this->validate(['body2' => 'required']);
 
         $comment = ModelsComment::where('id', $this->edit_comment_id)->update([
-            'body' => $this->update_body
+            'body' => $this->body2
         ]);
 
         if ($comment) {
             $this->body = NULL;
             $this->edit_comment_id = NULL;
+            session()->flash('success', 'Komentar berhasil diupdate');
         } else {
             session()->flash('error', 'Komentar gagal diubah');
         }
+    }
+
+    public function delete_confirmation($id)
+    {
+        
     }
 
     public function delete($id)
@@ -79,6 +126,7 @@ class Comment extends Component
 
         if ($comment) {
             return NULL;
+            session()->flash('error', 'Komentar berhasil dihapus');
         } else {
             session()->flash('error', 'Komentar gagal dihapus');
         }
