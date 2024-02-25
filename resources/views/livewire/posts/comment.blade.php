@@ -85,10 +85,12 @@
                                                             <i class="fas fa-edit text-warning"></i>
                                                         </button>
 
-                                                        <button wire:click="delete_confirmation({{ $comment->id }})"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modal_confirm_delete{{ $comment->id }}">
+                                                        {{-- <button wire:click="delete({{ $comment->id }})">
+                                                            <i class="fas fa-times-circle text-danger"></i>
+                                                        </button> --}}
 
+                                                        <button data-bs-toggle="modal"
+                                                            data-bs-target="#modal_confirm_delete{{ $comment->id }}">
                                                             <i class="fas fa-times-circle text-danger"></i>
                                                         </button>
                                                     @endif
@@ -190,7 +192,8 @@
                                                                     <i class="fas fa-edit text-warning"></i>
                                                                 </button>
 
-                                                                <button wire:click="delete({{ $comment2->id }})">
+                                                                <button data-bs-toggle="modal"
+                                                                data-bs-target="#modal_confirm_delete{{ $comment2->id }}">
                                                                     <i class="fas fa-times-circle text-danger"></i>
                                                                 </button>
                                                             @endif
@@ -240,6 +243,37 @@
                                                         </form>
                                                     @endif
                                                 </div>
+                                                {{-- modal delete --}}
+                                                <div wire:ignore.self class="modal fade"
+                                                    id="modal_confirm_delete{{ $comment2->id }}"
+                                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                                    Konfirmasi Hapus
+                                                                </h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <b>
+                                                                    Apakah anda yakin mau menghapus komentar ini?
+                                                                </b>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Tutup</button>
+                                                                <button wire:click="delete({{ $comment2->id }})"
+                                                                    class="btn btn-danger"
+                                                                    data-bs-dismiss="modal">Hapus</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- end modal --}}
                                             </div>
                                         </div>
                                     @endforeach
@@ -260,23 +294,21 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form action="" method="post">
-                                            @csrf
-                                            <div class="modal-body text-center">
-                                                <b>
-                                                    Apakah anda yakin mau menghapus potingan ini?
-                                                </b>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Tutup</button>
-                                                <button type="submit" class="btn btn-danger">Hapus</button>
-                                            </div>
-                                        </form>
+                                        <div class="modal-body text-center">
+                                            <b>
+                                                Apakah anda yakin mau menghapus komentar ini?
+                                            </b>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                            <button wire:click="delete({{ $comment->id }})" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Hapus</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             {{-- end modal --}}
+
                         </div>
                     @endforeach
                 </div>

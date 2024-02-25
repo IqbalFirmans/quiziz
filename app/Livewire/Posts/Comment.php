@@ -115,10 +115,6 @@ class Comment extends Component
         }
     }
 
-    public function delete_confirmation($id)
-    {
-        
-    }
 
     public function delete($id)
     {
