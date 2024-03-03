@@ -26,6 +26,11 @@ class Comment extends Model
         return $this->hasOne(Like::class, 'likes.user_id', Auth::user()->id);
     }
 
+    public function isLike()
+    {
+        return Like::where('user_id', Auth::user()->id)->where('comment_id', $this->id)->exists();
+    }
+
     public function totalLikes()
     {
         return $this->hasMany(Like::class)->count();

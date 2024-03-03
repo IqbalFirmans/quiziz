@@ -42,7 +42,7 @@
     <div class="container mt-4 mb-5">
         <div class="d-flex justify-content-center">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-12">
                     <div class="feed p-2">
                         <div class="p-2 bg-white border">
                             <div class="feed-text px-2">
@@ -79,50 +79,55 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="col-12">
                     @forelse ($data as $post)
-                        <div class="bg-white border mt-2">
-                            <div>
-                                <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
-                                    <div class="d-flex flex-row align-items-center feed-text px-2">
-                                        <img class="rounded-circle"
-                                            src="{{ $post->user->photo ? asset('storage/' . $post->user->photo) : asset('default.png') }}"
-                                            height="45" width="45">
+                    <div class="bg-white border mt-2">
+                        <div>
+                            <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+                                <div class="d-flex flex-row align-items-center feed-text px-2">
+                                    <img class="rounded-circle"
+                                        src="{{ $post->user->photo ? asset('storage/' . $post->user->photo) : asset('default.png') }}"
+                                        height="45" width="45">
 
-                                        <div class="d-flex flex-column flex-wrap ml-2 px-3">
-                                            <span class="font-weight-bold">{{ $post->user->name }}</span>
-                                            <span class="text-black-30 time">{{ $post->created_at->diffForHumans() }}</span>
-                                        </div>
+                                    <div class="d-flex flex-column flex-wrap ml-2 px-3">
+                                        <span class="font-weight-bold">{{ $post->user->name }}</span>
+                                        <span class="text-black-30 time">{{ $post->created_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="feed-image p-2 px-3">
-                                <img class="img-fluid img-responsive" src="{{ asset('storage/' . $post->image) }}">
-                            </div>
-                            <div class="p-2 px-3">
-                                Description :
-                                <span>{{ $post->description }}</span>
-                            </div>
-                            <div class="d-flex justify-content-end socials p-2 py-3">
-                                <i class="fa fa-thumbs-up text-primary">
-                                    <small>10</small>
-                                </i>
-                                <a href="#comments_section{{ $post->id }}" data-bs-toggle="collapse">
-                                    <i class="fa fa-comments"></i>
-                                </a>
-                            </div>
-                            <div class="collapse" id="comments_section{{ $post->id }}">
-                                @livewire('Posts.Comment', ['id' => $post->id])
-                            </div>
+                        </div>
+                        <div class="feed-image d-flex justify-content-center p-2 px-3">
+                            <img class="" style="width: 200px;height: 200px;object-fit:cover;" src="{{ asset('storage/' . $post->image) }}">
+                        </div>
+                        <div class="p-2 px-3">
+                            Description :
+                            <span>{{ $post->description }}</span>
+                        </div>
+                        <div class="d-flex justify-content-end socials p-2 py-3">
+                            @auth
+                            @livewire('Posts.LikePost', ['id' => $post->id])
+                            @else
+                            <i class="fa fa-thumbs-up text-primary mt-2">
+                                <small>{{ $post->Likes->count() }}</small>
+                            </i>
+                            @endauth
+                            <a href="#comments_section{{ $post->id }}" class="mt-2" data-bs-toggle="collapse">
+                                <i class="fa fa-comments"></i>
+                            </a>
+                        </div>
+                        <div class="collapse" id="comments_section{{ $post->id }}">
+                            @livewire('Posts.Comment', ['id' => $post->id])
+                        </div>
 
+                    </div>
+                @empty
+                    <div class="d-flex justify-content-center">
+                        <div class="text-center col-lg-8">
+                            <img src="{{ asset('no-data.jpg') }}" alt="no-data" class="img-fluid">
                         </div>
-                    @empty
-                        <div class="d-flex justify-content-center">
-                            <div class="text-center col-lg-8">
-                                <img src="{{ asset('no-data.jpg') }}" alt="no-data" class="img-fluid">
-                            </div>
-                        </div>
-                    @endforelse
+                    </div>
+                @endforelse
                 </div>
             </div>
         </div>

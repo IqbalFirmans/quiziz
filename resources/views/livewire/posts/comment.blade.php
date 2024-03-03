@@ -72,10 +72,10 @@
 
                                                 @auth
                                                     <button wire:click="like({{ $comment->id }})"
-                                                        class="text-{{ $comment->hasLike ? 'primary' : 'dark' }}">
+                                                        class="{{ $comment->isLike() ? 'text-primary' : 'text-dark' }}">
 
                                                         <i
-                                                            class="fas fa-thumbs-up text-{{ $comment->hasLike ? 'primary' : 'dark' }}"></i>
+                                                            class="fas fa-thumbs-up {{ $comment->isLike() ? 'text-primary' : 'text-dark' }}"></i>
 
                                                         {{ $comment->totalLikes() }}
                                                     </button>
@@ -179,10 +179,10 @@
 
                                                         @auth
                                                             <button wire:click="like({{ $comment2->id }})"
-                                                                class="text-{{ $comment2->hasLike ? 'primary' : 'dark' }}">
+                                                                class="{{ $comment2->isLike() ? 'text-primary' : 'text-dark' }}">
 
                                                                 <i
-                                                                    class="fas fa-thumbs-up text-{{ $comment2->hasLike ? 'primary' : 'dark' }}"></i>
+                                                                    class="fas fa-thumbs-up {{ $comment2->isLike() ? 'text-primary' : 'text-dark' }}"></i>
 
                                                                 {{ $comment2->totalLikes() }}
                                                             </button>
