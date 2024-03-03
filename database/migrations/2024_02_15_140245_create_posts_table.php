@@ -25,13 +25,15 @@ return new class extends Migration
             $table->foreignId('comment_id')->nullable();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
         });
 
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('comment_id')->constrained('comments')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('comment_id')->nullable()->constrained('comments')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('post_id')->nullable()->constrained('posts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
