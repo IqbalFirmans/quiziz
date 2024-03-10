@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
             $table->text('description');
             $table->date('publication_at')->nullable();
-            $table->tinyText('publication_status')->nullable();
+            $table->enum('publication_status', ['publik', 'private'])->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('questions_quizzes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
+            $table->foreignId('quiz_id')->references('id')->on('quizzes')->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('question');
             $table->timestamps();
         });

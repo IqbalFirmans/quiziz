@@ -10,6 +10,7 @@ class options_questions extends Model
     use HasFactory;
     protected $table = "options_questions";
     protected $fillable = [
+        'quiz_id',
         'question_id',
         'option',
         'true_or_false'

@@ -2,6 +2,7 @@
 
 namespace App\Services\Quiz;
 
+use App\Models\questions_quizzes;
 use App\Repositories\Quiz\Question\StoreOptionRepository;
 use App\Repositories\Quiz\Question\StoreQuestionRepository;
 
@@ -32,18 +33,21 @@ class StoreQuestionService
             return $this->question->store($array);
         }
     }
-    public function store_option($id, $data)
+    public function store_option($quiz_id,$id, $data)
     {
+
         for ($i = 1; $i <= 4; $i++) {
             if ($data['answer_true'] == $i) {
                 # code...
                 $this->option->store([
+                    'quiz_id' => $quiz_id,
                     'question_id' => $id,
                     'option' => $data['answer_' . $i],
                     'true_or_false' => true
                 ]);
             } else {
                 $this->option->store([
+                    'quiz_id' => $quiz_id,
                     'question_id' => $id,
                     'option' => $data['answer_' . $i],
                     'true_or_false' => false

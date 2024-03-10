@@ -13,7 +13,9 @@ class PublicationQuizRepository implements UpdateInterface
     }
     public function update($id, $data)
     {
-        $model = quizzes::findOrFail($id);
-        return $model->update($data);
+        return quizzes::findOrFail($id)->update([
+            'publication_status' => $data['status'],
+            'publication_at' => now()
+        ]);
     }
 }

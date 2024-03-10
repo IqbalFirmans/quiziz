@@ -1,0 +1,13 @@
+.card-size {
+    width: 300px;
+    margin: auto;
+}
+.btn-primary {
+    background-color: #e91e63 !important;
+}
+.bg-secondary {
+    background-color: rgb(230, 227, 227) !important;
+}
+.active {
+    background-color: #ff085a !important;
+}

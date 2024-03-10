@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('options_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->references('id')->on('questions_quizzes')->onDelete('cascade');
+            $table->foreignId('quiz_id')->references('id')->on('quizzes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('question_id')->references('id')->on('questions_quizzes')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('option');
             $table->boolean('true_or_false');
             $table->timestamps();

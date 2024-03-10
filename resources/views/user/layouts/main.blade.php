@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Link Izitoast Css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    @yield('head')
     <style>
         :root {
             --bs-blue: #63B3ED;
@@ -165,6 +166,11 @@
                                 class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('user/profile') ? 'bg-primary rounded text-white' : 'bg-light' }}"
                                 aria-current="true">
                                 <i class="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
+                            </a>
+                            <a href="/user/quiziz"
+                                class="list-group-item list-group-item-action my-1 py-2 ripple {{ request()->is('user/quiziz') ? 'bg-primary rounded text-white' : 'bg-light' }}"
+                                aria-current="true">
+                                <i class="fa-solid fa-q fa-fw me-3"></i></i><span>Quiz</span>
                             </a>
                         @endif
                         <form action="{{ route('logout') }}" method="post">

@@ -20,12 +20,13 @@ class QuestionController extends Controller
     }
     public function store(QuestionRequest $request, $id)
     {
+        $quiz_id = intval($id);
         $data = $request->validated();
-        $questions = $this->store_question->store_question($data, $id);
+        $questions = $this->store_question->store_question($data, $quiz_id);
         if ($questions == false) {
             return redirect()->back()->withErrors('Jawaban benar tidak terisi!');
         }
-        $this->store_question->store_option($questions->id, $data);
+        $this->store_question->store_option($quiz_id, $questions->id, $data);
         return redirect()->back()->with('success', 'Sukses menambahkan pertanyaan.');
     }
     public function edit($id)
