@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ResetPasswordNotification;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -80,5 +81,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function Likes()
     {
         return $this->hasMany(Like::class);
+    }
+    /**
+     * Get all of the quizzes_answer for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quizzes_answers(): HasMany
+    {
+        return $this->hasMany(quizzes_answers::class, 'user_id', 'id');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class quizzes extends Model
 {
@@ -31,5 +32,14 @@ class quizzes extends Model
     public function Questions()
     {
         return $this->hasMany(questions_quizzes::class, 'quiz_id');
+    }
+    /**
+     * Get all of the quizzes_answer for the quizzes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quizzes_answers(): HasMany
+    {
+        return $this->hasMany(quizzes_answers::class, 'quiz_id', 'id');
     }
 }
