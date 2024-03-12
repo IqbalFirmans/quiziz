@@ -20,11 +20,7 @@ class QuizController extends Controller
     }
     public function play($id)
     {
-        $check = quizzes_answers::where('user_id', Auth::user()->id)->exists();
-        if ($check) {
-            # code...
-            return redirect('/user/result-quiz/'.$id);
-        }
+
         $questions = questions_quizzes::where('quiz_id', $id)->paginate(1);
         $options = options_questions::where('quiz_id', $id)->get();
         return Inertia::render('Index', [
@@ -48,14 +44,7 @@ class QuizController extends Controller
             'option_id' => $request->option_id,
             'true_or_false' => $true_or_false->true_or_false
         ]);
-        if ($true_or_false->true_or_false) {
-            # code...
-            return redirect()->back();
-        } else {
-            # code...
-            return redirect()->back();
-        }
-
+        return redirect($request->url);
     }
     public function result_quiz($id)
     {

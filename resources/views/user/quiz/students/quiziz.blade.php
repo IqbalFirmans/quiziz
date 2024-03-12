@@ -77,9 +77,18 @@
                         </div>
                         <div class="card-footer d-flex gap-1 justify-content-center"
                             style="background: inherit; border-color: inherit;">
-                            <a href="/user/play/quiz/{{ $quiz->id }}">
-                                <button type="submit" class="btn btn-primary bg-primary btn-md border border-white rounded-2">Kerjakan</button>
-                            </a>
+                            @if (Auth::user()->IsFinish($quiz->id))
+                                <a href="/user/result-quiz/{{ $quiz->id }}">
+                                    <button type="submit"
+                                        class="btn btn-primary bg-primary btn-md border border-white rounded-2">Lihat
+                                        Hasil</button>
+                                </a>
+                            @else
+                                <a href="/user/play/quiz/{{ $quiz->id }}">
+                                    <button type="submit"
+                                        class="btn btn-primary bg-primary btn-md border border-white rounded-2">Kerjakan</button>
+                                </a>
+                            @endif
                         </div>
                     </div>
 

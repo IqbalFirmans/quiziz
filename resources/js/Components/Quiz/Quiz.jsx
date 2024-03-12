@@ -11,16 +11,27 @@ const Quiz = (props) => {
         quiz_id: "",
         question_id: "",
         option_id: "",
+        url: "",
     });
     function handleValues(index, quiz_id, question_id, option_id) {
         setActive(index);
-        setValues({
-            index: index,
-            quiz_id: quiz_id,
-            question_id: question_id,
-            option_id: option_id,
-            url: window.location,
-        });
+        if (props.questions.next_page_url != null) {
+            setValues({
+                index: index,
+                quiz_id: quiz_id,
+                question_id: question_id,
+                option_id: option_id,
+                url: props.questions.next_page_url,
+            });
+        } else {
+            setValues({
+                index: index,
+                quiz_id: quiz_id,
+                question_id: question_id,
+                option_id: option_id,
+                url: '/user/result-quiz/'+quiz_id,
+            });
+        }
     }
     const handleOption = (index, quiz_id, question_id, option_id) => {
         handleValues(index, quiz_id, question_id, option_id);
@@ -49,27 +60,16 @@ const Quiz = (props) => {
                                                 props.id,
                                                 option.id
                                             )
-                                        }
-                                        type="button"
-                                        className="w-100 bg-white border border-none border-white"
-                                    >
-                                        <div
-                                            className={`m-1 p-2 border border-white rounded-3 ${
+                                        } type="button" className="w-100 bg-white border border-none border-white">
+                                        <div className={`m-1 p-2 border border-white rounded-3 ${
                                                 active == index
                                                     ? "active text-white"
                                                     : "bg-secondary text-dark"
-                                            }`}
-                                        >
-                                            <input
-                                                hidden
-                                                type="radio"
-                                                name="option"
-                                                id=""
+                                            }`}>
+                                            <input hidden type="radio" name="option" id=""
                                                 value={String.fromCharCode(
                                                     65 + (index % 4)
-                                                )}
-                                                className="form-control"
-                                            />
+                                                )} className="form-control"/>
                                             {String.fromCharCode(
                                                 65 + (index % 4)
                                             ) +
@@ -87,25 +87,24 @@ const Quiz = (props) => {
             </div>
             <div className="d-flex justify-content-center mt-3">
                 {/** tombol navigasi */}
-                <form onSubmit={handleSubmit}>
-                    <button
-                        type="submit"
-                        className="btn btn-secondary p-2 mx-2 border border-white btn-sm rounded-5"
-                    >
-                        Simpan
-                    </button>
-                </form>
+
                 {props.questions.next_page_url != null ? (
-                    <InertiaLink className="btn btn-primary mx-2 border border-white btn-sm rounded-5" as="button" href={props.questions.next_page_url}>
-                        Lanjut &gt;
-                    </InertiaLink>
+                    <form onSubmit={handleSubmit}>
+                        <button
+                            type="submit"
+                            className="btn btn-white bg-primary text-white p-2 mx-2 border border-white btn-sm rounded-5"
+                        >
+                            Simpan
+                        </button>
+                    </form>
                 ) : (
-                    <a
-                       href={`/user/result-quiz/${props.quiz_id}`}
-                        className="btn btn-primary p-2 mx-2 border border-white btn-sm rounded-5"
-                    >
-                        <b>End Quiz</b>
-                    </a>
+                    <form onSubmit={handleSubmit}>
+                        <button
+                            type="submit"
+                            className="btn btn-white bg-primary text-white p-2 mx-2 border border-white btn-sm rounded-5">
+                            Simpan dan Selesai
+                        </button>
+                    </form>
                 )}
             </div>
         </div>

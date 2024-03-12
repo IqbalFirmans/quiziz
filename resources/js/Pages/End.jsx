@@ -23,11 +23,11 @@ const End = (props) => {
                         <br /> <br />
                         <p className="text-center text-secondary">
                             Hasil : {props.result.toFixed(1)} <br /> <br />
-                            <a href="/">
+                            <a href="/user/quiziz">
                                 <button
                                     type="button"
                                     className="btn btn-primary bg-primary rounded-2 btn-sm border border-white">
-                                    Pindah ke Home
+                                    Pindah ke Halaman Quiz
                                 </button>
                             </a>
                         </p>
