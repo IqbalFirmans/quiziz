@@ -1,10 +1,34 @@
 import React, { useState } from "react";
 import "./Quiz.css";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import { router } from "@inertiajs/react";
 
 const Quiz = (props) => {
-    console.log(props.options);
+    console.log(props.error);
     const [active, setActive] = useState(null);
+    const [values, setValues] = useState({
+        index: "",
+        quiz_id: "",
+        question_id: "",
+        option_id: "",
+    });
+    function handleValues(index, quiz_id, question_id, option_id) {
+        setActive(index);
+        setValues({
+            index: index,
+            quiz_id: quiz_id,
+            question_id: question_id,
+            option_id: option_id,
+            url: window.location,
+        });
+    }
+    const handleOption = (index, quiz_id, question_id, option_id) => {
+        handleValues(index, quiz_id, question_id, option_id);
+    };
+    function handleSubmit(e) {
+        e.preventDefault();
+        router.post("/user/play/answer-quiz/" + props.quiz_id, values);
+    }
     /** index % 4 akan mengembalikan nilai 0 pada index saat lebih dari 3 */
     return (
         <div className="card-size my-3">
@@ -17,8 +41,25 @@ const Quiz = (props) => {
                         return (
                             <div key={index}>
                                 {props.id == option.question_id ? (
-                                    <button onClick={() => setActive(index)} type="button" className="w-100 bg-white border border-none border-white">
-                                        <div className={`m-1 p-2 border border-white rounded-3 ${active==index?"active text-white":"bg-secondary text-dark"}`}>
+                                    <button
+                                        onClick={(e) =>
+                                            handleOption(
+                                                index,
+                                                props.quiz_id,
+                                                props.id,
+                                                option.id
+                                            )
+                                        }
+                                        type="button"
+                                        className="w-100 bg-white border border-none border-white"
+                                    >
+                                        <div
+                                            className={`m-1 p-2 border border-white rounded-3 ${
+                                                active == index
+                                                    ? "active text-white"
+                                                    : "bg-secondary text-dark"
+                                            }`}
+                                        >
                                             <input
                                                 hidden
                                                 type="radio"
@@ -46,23 +87,25 @@ const Quiz = (props) => {
             </div>
             <div className="d-flex justify-content-center mt-3">
                 {/** tombol navigasi */}
-
-                {props.questions.next_page_url != null ? (
-                    <InertiaLink
-                        href={props.questions.next_page_url}
-                        method="get"
-                        as="button"
-                        className="btn btn-primary mx-2 border border-white btn-sm rounded-5"
+                <form onSubmit={handleSubmit}>
+                    <button
+                        type="submit"
+                        className="btn btn-secondary p-2 mx-2 border border-white btn-sm rounded-5"
                     >
-                        Save & Next &gt;
+                        Simpan
+                    </button>
+                </form>
+                {props.questions.next_page_url != null ? (
+                    <InertiaLink className="btn btn-primary mx-2 border border-white btn-sm rounded-5" as="button" href={props.questions.next_page_url}>
+                        Lanjut &gt;
                     </InertiaLink>
                 ) : (
-                    <button
-                        type="button"
-                        className="btn btn-primary mx-2 border border-white btn-sm rounded-5"
+                    <a
+                       href={`/user/result-quiz/${props.quiz_id}`}
+                        className="btn btn-primary p-2 mx-2 border border-white btn-sm rounded-5"
                     >
                         <b>End Quiz</b>
-                    </button>
+                    </a>
                 )}
             </div>
         </div>

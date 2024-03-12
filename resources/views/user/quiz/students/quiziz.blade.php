@@ -78,7 +78,7 @@
                         <div class="card-footer d-flex gap-1 justify-content-center"
                             style="background: inherit; border-color: inherit;">
                             <a href="/user/play/quiz/{{ $quiz->id }}">
-                                <button type="submit" class="btn btn-primary">Kerjakan</button>
+                                <button type="submit" class="btn btn-primary bg-primary btn-md border border-white rounded-2">Kerjakan</button>
                             </a>
                         </div>
                     </div>

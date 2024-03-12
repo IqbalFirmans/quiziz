@@ -113,5 +113,7 @@ Route::prefix('user')->group(function () {
         // route quiz students
         Route::get('/quiziz', [StudentsQuizController::class, 'index']);
         Route::get('/play/quiz/{id}', [StudentsQuizController::class, 'play']);
+        Route::post('/play/answer-quiz/{id}', [StudentsQuizController::class, 'answer_quiz']);
+        Route::get('/result-quiz/{quiz_id}', [StudentsQuizController::class, 'result_quiz']);
     });
 });

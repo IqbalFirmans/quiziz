@@ -14,6 +14,7 @@ function Index(props) {
                         question={question.question}
                         questions={questions}
                         options={props.options}
+                        quiz_id={props.quiz_id}
                     />
                 );
             })}
