@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\QuestionRequest;
 use App\Models\options_questions;
 use App\Models\questions_quizzes;
+use App\Models\quizzes;
+use App\Models\quizzes_answers;
 use App\Services\Quiz\StoreQuestionService;
 use App\Services\Quiz\UpdateQuestionService;
 use Illuminate\Http\Request;
@@ -62,5 +64,11 @@ class QuestionController extends Controller
         } else {
             return redirect()->back()->withErrors('Gagal menghapus pertanyaan.');
         }
+    }
+    public function all_result($id)
+    {
+        $all_result = quizzes_answers::where('quiz_id', $id)->get();
+        $name_quiz = quizzes::findOrFail($id)->name;
+        return view('user.quiz.owner.all_result', compact('all_result', 'name_quiz'));
     }
 }

@@ -11,8 +11,8 @@
                 class="btn btn-white bg-primary border border-white text-white">Publikasikan</button>
             <button type="button" data-bs-toggle="collapse" data-bs-target="#collapse_edit"
                 class="btn btn-white bg-warning border border-white text-white">Edit</button>
-            <a href="/user/quiz">
-                <button type="button" class="btn btn-secondary">Kembali</button>
+            <a href="/user/all-result/{{ $quiz->id }}">
+                <button type="button" class="btn btn-secondary">Lihat Hasil</button>
             </a>
             <br>
             @if ($quiz->publication_status)

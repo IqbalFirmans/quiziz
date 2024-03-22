@@ -32,18 +32,25 @@ class QuizController extends Controller
     }
     public function answer_quiz(Request $request, $id)
     {
-        $check = quizzes_answers::where('user_id', Auth::user()->id)->where('quiz_id', $request->quiz_id)->where('question_id', $request->question_id)->exists();
-        if ($check) {
-            return redirect()->back();
-        }
+        // table quizzes answers & table results quizzes
+        $check = quizzes_answers::where('user_id', Auth::user()->id)->where('quiz_id', $request->quiz_id)->where('question_id', $request->question_id)->first();
         $true_or_false = options_questions::findOrFail($request->option_id);
-        quizzes_answers::create([
-            'user_id' => Auth::user()->id,
-            'quiz_id' => $request->quiz_id,
-            'question_id' => $request->question_id,
-            'option_id' => $request->option_id,
-            'true_or_false' => $true_or_false->true_or_false
-        ]);
+        
+        if ($check) {
+            quizzes_answers::findOrFail($check->id)->update([
+                'question_id' => $request->question_id,
+                'option_id' => $request->option_id,
+                'true_or_false' => $true_or_false->true_or_false
+            ]);
+        } else {
+            $q = quizzes_answers::create([
+                'user_id' => Auth::user()->id,
+                'quiz_id' => $request->quiz_id,
+                'question_id' => $request->question_id,
+                'option_id' => $request->option_id,
+                'true_or_false' => $true_or_false->true_or_false
+            ]);
+        }
         return redirect($request->url);
     }
     public function result_quiz($id)

@@ -91,6 +91,7 @@ Route::prefix('user')->group(function () {
         Route::delete('/destroy/pertanyaan/{id}', [QuestionController::class, 'destroy'])->name('destroy.question');
         Route::get('/edit/pertanyaan/{id}', [QuestionController::class, 'edit'])->name('edit.question');
         Route::put('/update/pertanyaan/{id}', [QuestionController::class, 'update'])->name('update.question');
+        Route::get('/all-result/{id}', [QuestionController::class, 'all_result'])->name('all.result');
         // publikasi kuis
         Route::put('/publikasi/kuis/{id}', [QuizController::class, 'publication'])->name('quiz.publication');
         // Change Password

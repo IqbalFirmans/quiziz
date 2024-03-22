@@ -94,4 +94,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function IsFinish($quiz_id) {
         return quizzes_answers::where('quiz_id', $quiz_id)->where('user_id', $this->id)->exists();
     }
+    public function Results_Quizzes()
+    {
+        return $this->hasMany(results_quizzes::class, 'user_id', 'id');
+    }
 }
